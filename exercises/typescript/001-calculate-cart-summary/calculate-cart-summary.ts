@@ -11,5 +11,18 @@ export type CartSummary = {
 };
 
 export function calculateCartSummary(items: readonly CartItem[]): CartSummary {
-  throw new Error(`Not implemented for ${items.length} cart items`);
+  let totalQuantity = 0
+  let subtotalCents = 0
+  let uniqueProductCount = 0
+
+  for (const item of items) {
+    totalQuantity += item.quantity
+    subtotalCents += item.unitPriceCents * item.quantity
+    uniqueProductCount += new Set(item.productId).size
+  }
+  return {
+    totalQuantity,
+    subtotalCents,
+    uniqueProductCount
+  }
 }
