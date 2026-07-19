@@ -17,7 +17,17 @@ Each exercise combines implementation and testing. An AI tutor reviews the resul
 
 ## Repository layout
 
-Exercises are grouped by language and numbered in the order they are assigned. The repository currently begins with `exercises/typescript/001-summarize-user-activity`. Go, React, and longer-project directories will be added when those tracks begin.
+Exercises are grouped by language and numbered in the order they are assigned:
+
+```text
+exercises/
+  go/
+  react/
+  typescript/
+projects/
+```
+
+The repository currently begins with `exercises/typescript/001-summarize-user-activity`. The Go and React tracks, along with longer projects, will be populated as the curriculum expands.
 
 Small exercises stay flat inside their task folder. Larger assignments can introduce their own `src` layout when that structure becomes useful.
 
