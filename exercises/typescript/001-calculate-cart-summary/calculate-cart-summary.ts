@@ -15,10 +15,13 @@ export function calculateCartSummary(items: readonly CartItem[]): CartSummary {
   let subtotalCents = 0
   let uniqueProductCount = 0
 
+  let uniqueProducts = new Set()
+
   for (const item of items) {
     totalQuantity += item.quantity
     subtotalCents += item.unitPriceCents * item.quantity
-    uniqueProductCount += new Set(item.productId).size
+    uniqueProducts.add(item.productId)
+    uniqueProductCount = uniqueProducts.size
   }
   return {
     totalQuantity,

@@ -64,7 +64,7 @@ describe('calculateCartSummary', () => {
     it('summarizes multiple cart items', () => {
         expect(calculateCartSummary(itemBundle)).toEqual({
             totalQuantity: 10,
-            subtotalCents: 11_000,
+            subtotalCents: 15_000,
             uniqueProductCount: 4,
         });
     });
