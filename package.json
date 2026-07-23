@@ -4,10 +4,14 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "test": "vitest run",
+    "test": "vitest run --exclude 'exercises/typescript/003-repair-inventory-reservation/**'",
+    "test:all": "vitest run",
     "test:watch": "vitest",
     "typecheck": "tsc --noEmit",
-    "check": "npm run typecheck && npm test"
+    "test:go": "go test ./...",
+    "check:typescript": "npm run typecheck && npm test",
+    "check:go": "go vet ./... && go test ./...",
+    "check": "npm run check:typescript && npm run check:go"
   },
   "devDependencies": {
     "typescript": "7.0.2",

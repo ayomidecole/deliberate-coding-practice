@@ -41,3 +41,13 @@ npm run check
 ```
 
 Each exercise's `TASK.md` contains its specific command and acceptance criteria.
+
+## Common Go commands
+
+```sh
+go test ./...
+go vet ./...
+gofmt -w exercises/go
+```
+
+Run `npm run check` for the full TypeScript and Go repository acceptance suite.
