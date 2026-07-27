@@ -47,6 +47,10 @@ For any work that creates, changes, reviews, or advances an exercise:
 18. Distinguish learner context from curriculum direction. A diagnostic list informs the
     evidence audit but does not prescribe the next exercise unless the learner explicitly
     asks for those items to determine the reconstruction.
+19. Vary test ownership deliberately: fully supplied tests, a starter test plus learner
+    cases, learner-authored tests, and test-first tasks are all valid. Supply unfamiliar
+    harness or boundary infrastructure. Treat increased test responsibility as a difficulty
+    dimension and do not pair it with another major unfamiliar dimension.
 
 These gates are mandatory. Concision, passing tests, or a single topic label do not
 override them.
