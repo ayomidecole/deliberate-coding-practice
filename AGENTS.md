@@ -51,6 +51,9 @@ For any work that creates, changes, reviews, or advances an exercise:
     cases, learner-authored tests, and test-first tasks are all valid. Supply unfamiliar
     harness or boundary infrastructure. Treat increased test responsibility as a difficulty
     dimension and do not pair it with another major unfamiliar dimension.
+20. Every exercise conclusion must include one concrete, task-specific system-design lesson
+    connecting the local concept to boundaries, contracts, components, data flow,
+    reliability, or ownership. This reflection does not expand implementation scope.
 
 These gates are mandatory. Concision, passing tests, or a single topic label do not
 override them.
