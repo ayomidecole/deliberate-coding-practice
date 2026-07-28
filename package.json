@@ -4,7 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "test": "vitest run --exclude 'exercises/typescript/003-repair-inventory-reservation/**'",
+    "test": "vitest run --exclude 'exercises/typescript/003-repair-inventory-reservation/**' --exclude 'exercises/react/001-render-product-stock-summary/**'",
     "test:all": "vitest run",
     "test:watch": "vitest",
     "typecheck": "tsc --noEmit",
