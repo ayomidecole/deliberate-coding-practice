@@ -1,84 +1,77 @@
 # REACT-004: Compose a Discussion Panel
 
-Status: active
+Status: complete
 
 Target time: 20–30 minutes
 
 Primary capability: retrieve parent/child composition with less scaffold
 
-Test responsibility: none; the React harness and tests are supplied
+## Goal
 
-## Engineering reason
+Build a typed parent component that renders a supplied child and sends each value to the
+component that owns it.
 
-REACT-003 introduced composition with the complete parent signature supplied. This task
-checks whether you can reconstruct the parent boundary while continuing to route each value
-to the component that owns it.
+In a Bulletproof React application, both components would live under
+`features/discussions/components`. Folder placement is supplied in this exercise.
 
-Within a Bulletproof React application, both components would belong under
-`features/discussions/components`. Their placement is supplied; folder design is not part
-of this retrieval task.
+## Mental model
 
-## Supplied structure
+The parent coordinates the larger UI. The child owns a narrower rendering contract.
+Props flow downward:
 
-- `discussion-summary.tsx` contains a complete child component. Do not edit it.
-- `discussion-panel.tsx` contains the named child import and complete readonly parent props
-  type, but no parent component implementation.
-- The complete tests and browser-like environment are supplied.
+```text
+DiscussionPanel
+├── title ──────────> DiscussionSummary
+├── commentCount ──> DiscussionSummary
+└── authorName ────> parent-owned paragraph
+```
 
-Define and export a function component named `DiscussionPanel` that accepts one props object
-using `DiscussionPanelProps`. It must render one semantic JSX tree that:
+Explicit prop names make the boundary visible. The parent should render the child as a
+capitalized JSX tag rather than call it as a regular function.
 
-- renders the supplied `DiscussionSummary` child
-- passes `title` and `commentCount` to the child explicitly
-- renders the exact text `Started by <authorName>` in parent-owned paragraph markup
-- does not duplicate the child’s heading or comment-count markup
+## Your task
 
-The tests render two discussions to verify the component contract and data flow.
+The child component, named import, readonly parent props type, tests, and browser-like test
+environment are supplied.
 
-## Constraints
+Define and export `DiscussionPanel` in `discussion-panel.tsx`. It must:
 
-- Edit only `discussion-panel.tsx`.
-- Keep the supplied import and `DiscussionPanelProps` unchanged.
-- Use a named export.
-- Pass child props explicitly; do not use JSX prop spreading.
-- Do not call `DiscussionSummary` as a regular function.
-- Do not add state, events, conditions, lists, styling, `children`, or another component.
-- Do not edit `discussion-summary.tsx` or the tests.
+- use `DiscussionPanelProps`
+- render `DiscussionSummary`
+- pass `title` and `commentCount` to the child explicitly
+- render the exact text `Started by <authorName>` in a parent-owned paragraph
+- avoid duplicating the child’s heading or comment-count markup
 
-## Required reading
+## Scope
+
+Edit only `discussion-panel.tsx`. Do not change the supplied import, type, child, or tests.
+Do not add prop spreading, state, events, conditions, lists, styling, `children`, or another
+component.
+
+## Start and verify
+
+1. Run the focused test and read the missing-export failure.
+2. Define the exported, typed parent.
+3. Render the supplied child with its two values.
+4. Add the parent-owned author text.
+
+```sh
+npx vitest run exercises/react/004-compose-discussion-panel
+npm run check:typescript
+```
+
+## Documentation
 
 - [React: Passing Props to a Component](https://react.dev/learn/passing-props-to-a-component)
 - [React: Importing and Exporting Components](https://react.dev/learn/importing-and-exporting-components)
 
-## Five-minute start
+## Done when
 
-1. Run the focused test and read the missing-export failure.
-2. Define and export `DiscussionPanel` using the supplied props type.
-3. Render `DiscussionSummary` with its two owned values.
-4. Render the parent-owned author text.
-
-Focused test:
-
-```sh
-npx vitest run exercises/react/004-compose-discussion-panel
-```
-
-Full TypeScript/React acceptance check:
-
-```sh
-npm run check:typescript
-```
-
-## Acceptance criteria
-
-- Both supplied test cases pass.
-- Type-checking passes.
-- The learner-authored parent uses `DiscussionPanelProps`.
-- The supplied child receives only `title` and `commentCount`.
-- The parent renders the author text itself.
-- No child markup is duplicated in the parent.
+- Both supplied tests and type-checking pass.
+- The parent uses `DiscussionPanelProps`.
+- The child receives only its owned values.
+- Author markup remains in the parent.
 - No excluded behavior or test changes are introduced.
-- Both verification commands pass.
 
-When finished, request review and disclose any documentation, hints, prior exercise
-reference, or outside AI help.
+Request review and disclose any documentation, hints, prior exercise reference, or outside
+AI help.
