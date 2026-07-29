@@ -1,6 +1,6 @@
 # REACT-002: Build a Team Summary
 
-Status: active
+Status: complete
 
 Target time: 15–25 minutes
 
