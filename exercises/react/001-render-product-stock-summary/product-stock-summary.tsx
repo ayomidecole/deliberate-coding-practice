@@ -1,11 +1,16 @@
 export type ProductStockSummaryProps = {
-  readonly productName: string;
-  readonly availableUnits: number;
+    readonly productName: string;
+    readonly availableUnits: number;
 };
 
 export function ProductStockSummary({
-  productName,
-  availableUnits,
+    productName,
+    availableUnits,
 }: ProductStockSummaryProps) {
-  return null;
+    return (
+        <div>
+            <h2>{productName}</h2>
+            <p>{availableUnits} units available</p>
+        </div>
+    );
 }

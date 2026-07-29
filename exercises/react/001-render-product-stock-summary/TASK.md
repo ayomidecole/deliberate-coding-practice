@@ -1,6 +1,6 @@
 # REACT-001: Render a Product Stock Summary
 
-Status: queued; GO-022 remains active  
+Status: complete
 Target time when activated: 15–25 minutes  
 Primary capability: render supplied typed props as semantic JSX  
 Test responsibility: none; the unfamiliar React test harness is supplied
