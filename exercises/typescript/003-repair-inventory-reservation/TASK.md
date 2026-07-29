@@ -1,5 +1,7 @@
 # TS-003: Repair an Inventory Reservation Contract
 
+Status: complete
+
 Target time: 30–45 minutes  
 Primary focus: reading existing code, debugging from tests, explicit failure contracts, and discriminated unions
 
