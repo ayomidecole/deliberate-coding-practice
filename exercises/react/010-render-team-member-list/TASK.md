@@ -1,6 +1,6 @@
 # REACT-010: Render a Team Member List
 
-Status: active
+Status: complete
 
 Target time: 15–25 minutes
 

@@ -5,5 +5,14 @@ export type TeamMemberListProps = {
 };
 
 export function TeamMemberList({ members }: TeamMemberListProps) {
-  return null;
+  return (
+    <section>
+      <h2>Team members</h2>
+      <ul>
+        {members.map((member) => {
+          return <li key={member.id}>{member.displayName}: {member.role}</li>
+        })}
+      </ul>
+    </section>
+  )
 }
