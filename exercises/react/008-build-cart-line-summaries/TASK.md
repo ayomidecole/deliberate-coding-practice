@@ -1,6 +1,6 @@
 # REACT-008: Build Cart Line Summaries
 
-Status: active
+Status: complete
 
 Target time: 15–25 minutes
 
