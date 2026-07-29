@@ -1,6 +1,6 @@
 # REACT-007: Build Order Options
 
-Status: active
+Status: complete
 
 Target time: 20–30 minutes
 
