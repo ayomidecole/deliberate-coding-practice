@@ -1,6 +1,6 @@
 # TS-004: Validate a Dispatch Batch Size
 
-Status: active
+Status: complete
 
 Target time: 10–20 minutes
 

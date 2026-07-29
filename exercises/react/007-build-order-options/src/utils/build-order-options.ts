@@ -11,5 +11,8 @@ export type OrderOption = {
 export function buildOrderOptions(
   orders: readonly OrderRecord[],
 ): OrderOption[] {
-  return [];
+  const order: OrderOption[] = orders.map(((order) => {
+    return { value: order.id, label:`${order.customerName} (${order.id})` }
+  }))
+  return order;
 }
