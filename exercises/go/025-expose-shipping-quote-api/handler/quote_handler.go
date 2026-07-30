@@ -1,6 +1,9 @@
 package handler
 
 import (
+	"errors"
+	"net/http"
+
 	"example.com/deliberate-coding-practice/exercises/go/025-expose-shipping-quote-api/service"
 	"github.com/gin-gonic/gin"
 )
@@ -27,4 +30,28 @@ type Handler struct {
 }
 
 func (handler *Handler) createQuote(c *gin.Context) {
+	var body quoteRequestJSON
+
+	if err := c.ShouldBindJSON(&body); err != nil {
+		c.JSON(http.StatusBadRequest, errorResponseJSON{Error: "invalid request"})
+		return
+	}
+
+	quote, err := handler.service.BuildQuote(
+		body.ShipmentID,
+		body.DistanceMiles,
+		body.RatePerMileCents,
+	)
+
+	if errors.Is(err, service.ErrInvalidDistance) {
+		c.JSON(http.StatusUnprocessableEntity, errorResponseJSON{Error: "invalid distance"})
+		return
+	}
+
+	c.JSON(http.StatusOK, quoteResponseJSON{
+		ShipmentID:       quote.ShipmentID,
+		DistanceMiles:    quote.DistanceMiles,
+		RatePerMileCents: quote.RatePerMileCents,
+		TotalCostCents:   quote.TotalCostCents,
+	})
 }
