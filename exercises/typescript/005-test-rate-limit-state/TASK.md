@@ -1,6 +1,6 @@
 # TS-005: Test a Rate-Limit State
 
-Status: active
+Status: complete
 
 Target time: 15–25 minutes
 
