@@ -11,8 +11,8 @@ export function DeliveryNoteDisclosure() {
         <div>
             <button type="button" onClick={clickHandler}>
                 Reveal delivery note
-            </button>
-            <p>{isRevealed ? 'Signature required at delivery.' : null}</p>
+        </button>
+        {isRevealed? <p>Signature required at delivery.</p> : null}
         </div>
     );
 }

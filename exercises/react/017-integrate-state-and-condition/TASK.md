@@ -1,6 +1,6 @@
 # REACT-017: Integrate State and Conditional UI
 
-Status: active
+Status: complete
 
 Target time: 25–35 minutes
 
