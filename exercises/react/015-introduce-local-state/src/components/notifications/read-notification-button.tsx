@@ -1,7 +1,17 @@
-import { useState } from "react";
+import { useState } from 'react';
 
 export function ReadNotificationButton() {
-  const [isRead, setIsRead] = useState(false);
+    const [isRead, setIsRead] = useState(false);
 
-  return null;
+    function clickHandler() {
+        setIsRead(true);
+    }
+
+    return (
+        <div>
+            <button type="button" onClick={clickHandler}>
+                {isRead ? 'Notification read' : 'Mark notification as read'}
+            </button>
+        </div>
+    );
 }

@@ -1,6 +1,6 @@
 # REACT-015: Introduce Local State
 
-Status: active
+Status: complete
 
 Target time: 25–35 minutes
 
