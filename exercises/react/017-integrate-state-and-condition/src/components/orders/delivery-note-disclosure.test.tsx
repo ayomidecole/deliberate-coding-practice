@@ -9,13 +9,14 @@ afterEach(cleanup);
 
 describe("DeliveryNoteDisclosure", () => {
   it("hides the delivery note initially", () => {
-    render(<DeliveryNoteDisclosure />);
+    const { container } = render(<DeliveryNoteDisclosure />);
 
     const button = screen.getByRole("button", {
       name: "Reveal delivery note",
     });
     expect(button.getAttribute("type")).toBe("button");
     expect(screen.queryByText("Signature required at delivery.")).toBeNull();
+    expect(container.querySelector("p")).toBeNull();
   });
 
   it("reveals the delivery note after a click", () => {
