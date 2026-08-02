@@ -1,6 +1,6 @@
 # REACT-016: Retrieve Local State
 
-Status: active
+Status: complete
 
 Target time: 20–30 minutes
 

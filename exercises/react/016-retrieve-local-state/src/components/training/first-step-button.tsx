@@ -1,5 +1,14 @@
-import { useState } from "react";
+import { useState } from 'react';
 
 export function FirstStepButton() {
-  return null;
+    const [number, setNumber] = useState(0);
+
+    function clickHandler() {
+        setNumber(1);
+    }
+    return (
+        <button type="button" onClick={clickHandler}>
+            {`Completed steps: ${number}`}
+        </button>
+    );
 }
