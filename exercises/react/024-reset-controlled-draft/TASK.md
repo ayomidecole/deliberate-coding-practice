@@ -1,6 +1,6 @@
 # REACT-024: Reset a Controlled Draft
 
-Status: active
+Status: complete
 
 Target time: 30–40 minutes
 
