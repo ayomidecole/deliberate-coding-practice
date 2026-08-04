@@ -1,6 +1,6 @@
 # REACT-018: Compose a Stateful Feature
 
-Status: active
+Status: complete
 
 Target time: 30–40 minutes
 

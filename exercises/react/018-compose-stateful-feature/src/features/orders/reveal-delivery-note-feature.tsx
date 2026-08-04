@@ -1,7 +1,14 @@
-import { useState } from "react";
+import { useState } from 'react';
 
-import { DeliveryNoteDisclosure } from "../../components/orders/delivery-note-disclosure";
+import { DeliveryNoteDisclosure } from '../../components/orders/delivery-note-disclosure';
 
 export function RevealDeliveryNoteFeature() {
-  return null;
+    const [isRevealed, setIsRevealed] = useState(false);
+
+    function handleReveal() {
+        setIsRevealed(true);
+    }
+    return (
+        <DeliveryNoteDisclosure isRevealed={isRevealed} onReveal={handleReveal} />
+    );
 }
