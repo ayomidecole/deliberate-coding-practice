@@ -48,5 +48,8 @@ describe('DraftCustomerNoteFeature', () => {
         expect(input.value).toBe('');
         expect(clearButton.disabled).toBe(true);
         expect(screen.getByText('No note started.')).toBeTruthy();
+        expect(
+            screen.getByText('Draft note: Call customer tomorrow'),
+        ).toBeNull();
     });
 });

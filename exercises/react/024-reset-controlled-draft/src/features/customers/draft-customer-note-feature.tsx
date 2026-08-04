@@ -16,7 +16,7 @@ export function DraftCustomerNoteFeature() {
 
     return (
         <section aria-labelledby="find-note-heading">
-            <h2>Draft customer note</h2>
+            <h2 id="find-note-heading">Draft customer note</h2>
             <CustomerNoteField note={note} onChange={handleNote} />
             <ClearDraftButton disabled={note === ''} onClear={clearNote} />
             {note === '' ? <p>No note started.</p> : <p>Draft note: {note}</p>}
