@@ -38,7 +38,7 @@ describe('EditContactEmailFeature', () => {
             },
         });
         expect(input.value).toBe('aaa@aa.com');
-      expect(screen.getByText('Draft email: aaa@aa.com')).toBeTruthy();
-      expect(screen.queryByText("Draft email: mmm@aa.com")).toBeNull()
+        expect(screen.getByText('Draft email: aaa@aa.com')).toBeTruthy();
+        expect(screen.queryByText('Draft email: mmm@aa.com')).toBeNull();
     });
 });
