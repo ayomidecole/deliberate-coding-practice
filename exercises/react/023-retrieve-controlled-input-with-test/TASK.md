@@ -1,6 +1,6 @@
 # REACT-023: Retrieve a Controlled Input and Test It
 
-Status: active
+Status: complete
 
 Target time: 30–40 minutes
 
