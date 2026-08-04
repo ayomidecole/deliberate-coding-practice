@@ -5,7 +5,7 @@ import { OrderSearchField } from "../../components/orders/order-search-field";
 export function SearchOrdersFeature() {
   const [searchTerm, setSearchTerm] = useState("");
 
-  const handleSearchTermChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleSearchTermChange = (event: ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(event.currentTarget.value)
   }
   
