@@ -10,4 +10,8 @@ describe('canAcceptJobs', () => {
     it('rejects jobs when the proposed load exceeds capacity', () => {
         expect(canAcceptJobs(7, 4, 10)).toBe(false);
     });
+
+    it('accepts jobs when proposed load is at capacity', () => {
+        expect(canAcceptJobs(5, 5, 10)).toBe(true);
+    });
 });

@@ -3,5 +3,5 @@ export function canAcceptJobs(
     incomingJobs: number,
     maxConcurrentJobs: number,
 ): boolean {
-    return false;
+    return incomingJobs <= maxConcurrentJobs - currentJobs;
 }

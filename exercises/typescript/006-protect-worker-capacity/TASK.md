@@ -1,6 +1,6 @@
 # TS-006: Protect Worker Capacity
 
-Status: active
+Status: complete
 
 Target time: 15–25 minutes
 
