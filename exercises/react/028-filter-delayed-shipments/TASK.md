@@ -1,6 +1,6 @@
 # REACT-028: Retrieve Derived Shipment Filtering
 
-Status: active
+Status: complete
 
 Target time: 30–40 minutes
 
