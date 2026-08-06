@@ -41,7 +41,7 @@ export function ReviewShipmentDelaysFeature() {
                 onFilterChange={handleFilter}
             />
             <ShipmentResults
-                shipments={delayed ? visibleShipments : SHIPMENT_SUMMARIES}
+                shipments={visibleShipments}
             />
         </section>
     );
