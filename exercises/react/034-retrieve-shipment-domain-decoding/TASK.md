@@ -1,6 +1,6 @@
 # REACT-034: Retrieve Scalar Domain Decoding
 
-Status: active
+Status: complete
 
 Target time: 20–30 minutes
 
