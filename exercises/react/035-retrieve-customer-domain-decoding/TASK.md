@@ -1,6 +1,6 @@
 # REACT-035: Retrieve Domain Decoding Independently
 
-Status: active
+Status: complete
 
 Target time: 25–35 minutes
 
