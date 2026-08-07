@@ -1,6 +1,6 @@
 # REACT-039: Retrieve String-Array Domain Decoding
 
-Status: active
+Status: complete
 
 Target time: 35–50 minutes
 
