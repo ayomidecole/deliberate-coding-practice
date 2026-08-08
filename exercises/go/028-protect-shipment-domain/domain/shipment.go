@@ -20,5 +20,19 @@ type Shipment struct {
 }
 
 func (shipment Shipment) Dispatch(availableWorkers int) (Shipment, error) {
-	return Shipment{}, nil
+
+	insufficientWorkers := availableWorkers < shipment.RequiredWorkers
+
+	if shipment.Status != StatusReady {
+		return shipment, ErrShipmentNotReady
+	}
+
+	if shipment.Status == StatusReady && insufficientWorkers {
+		return shipment, ErrInsufficientWorkers
+	}
+	return Shipment{
+		ID:              shipment.ID,
+		Status:          StatusDispatched,
+		RequiredWorkers: shipment.RequiredWorkers,
+	}, nil
 }
