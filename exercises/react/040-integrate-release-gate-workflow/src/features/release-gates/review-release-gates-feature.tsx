@@ -10,5 +10,15 @@ export function ReviewReleaseGatesFeature({
   gates,
   minimumApprovals,
 }: ReviewReleaseGatesFeatureProps) {
-  return null;
+  const reviewGates = gates.filter((gate) => {
+    return gate.minimumApprovals >= minimumApprovals
+  })
+
+  return (
+    <section aria-labelledby='approval-heading'>
+      <h2 id='approval-heading'>Release gates requiring review</h2>
+      <ReleaseGateResults gates={reviewGates}/>
+  </section>
+
+  )
 }
