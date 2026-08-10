@@ -15,19 +15,48 @@ Each exercise combines implementation and testing. An AI tutor reviews the resul
 - Run the acceptance commands before requesting a review.
 - During review, be ready to explain the code or make a small change.
 
+## Curriculum arcs
+
+Every language track is divided into **arcs**: coherent phases that group related
+capabilities and show what larger engineering outcome the exercises are building toward.
+An arc is not a timebox, a fixed number of tasks, or merely a folder for one syntax topic.
+
+Every arc uses the same mastery progression:
+
+```text
+introduce → guided practice → retrieval → transfer → integration → independent rebuild
+```
+
+The tutor introduces and scaffolds unfamiliar boundaries, then reduces help as evidence
+improves. Assisted completion schedules another retrieval task. An arc ends only after the
+learner can implement, test, debug, and transfer its capabilities in a changed context;
+finishing an arbitrary task count is not enough.
+
+Arc roadmaps are provisional. Before entering the next arc, review the learner's evidence,
+current goals, likely first edits, and likely stuck points. Rescope or reorder the roadmap
+when that evidence supports a better progression.
+
 ## Repository layout
 
-Exercises are grouped by language and numbered in the order they are assigned:
+The target layout groups exercises by language, numbered arc, and assignment order:
 
 ```text
 exercises/
   go/
+    <numbered-arc>/
+      <numbered-exercise>/
   react/
+    01-fundamentals/
+    02-data-boundaries/
+    03-layered-integration/
   typescript/
+    <numbered-arc>/
+      <numbered-exercise>/
 projects/
 ```
 
-The repository currently begins with `exercises/typescript/001-summarize-user-activity`. The Go and React tracks, along with longer projects, will be populated as the curriculum expands.
+React already uses the arc layout. Go and TypeScript will adopt it after their respective
+learning chats review the existing evidence and define appropriate arc boundaries.
 
 Small exercises stay flat inside their task folder. Larger assignments can introduce their own `src` layout when that structure becomes useful.
 
