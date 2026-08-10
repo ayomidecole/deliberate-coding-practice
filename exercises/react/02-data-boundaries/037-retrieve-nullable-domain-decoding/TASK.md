@@ -141,7 +141,7 @@ Before editing, run:
 
 ```bash
 npm run typecheck
-npx vitest run exercises/react/03-domain-decoding/037-retrieve-nullable-domain-decoding
+npx vitest run exercises/react/02-data-boundaries/037-retrieve-nullable-domain-decoding
 ```
 
 The compiler and all three supplied cases should fail because the class has no constructor
@@ -151,7 +151,7 @@ After completing all three deliverables, run:
 
 ```bash
 npm run typecheck
-npx vitest run exercises/react/03-domain-decoding/037-retrieve-nullable-domain-decoding
+npx vitest run exercises/react/02-data-boundaries/037-retrieve-nullable-domain-decoding
 npx vitest run --exclude 'exercises/typescript/008-consume-job-admission-decision/**'
 ```
 

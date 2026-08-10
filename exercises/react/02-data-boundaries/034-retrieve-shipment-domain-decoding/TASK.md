@@ -117,7 +117,7 @@ Before editing, run:
 
 ```bash
 npm run typecheck
-npx vitest run exercises/react/03-domain-decoding/034-retrieve-shipment-domain-decoding
+npx vitest run exercises/react/02-data-boundaries/034-retrieve-shipment-domain-decoding
 ```
 
 Typecheck should report three uninitialized properties. Both focused cases should fail
@@ -128,7 +128,7 @@ After your edits, run:
 
 ```bash
 npm run typecheck
-npx vitest run exercises/react/03-domain-decoding/034-retrieve-shipment-domain-decoding
+npx vitest run exercises/react/02-data-boundaries/034-retrieve-shipment-domain-decoding
 npx vitest run --exclude 'exercises/typescript/008-consume-job-admission-decision/**'
 ```
 

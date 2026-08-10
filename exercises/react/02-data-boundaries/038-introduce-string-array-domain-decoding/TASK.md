@@ -152,7 +152,7 @@ Before editing, run:
 
 ```bash
 npm run typecheck
-npx vitest run exercises/react/03-domain-decoding/038-introduce-string-array-domain-decoding
+npx vitest run exercises/react/02-data-boundaries/038-introduce-string-array-domain-decoding
 ```
 
 The compiler and all four supplied cases should fail because `Deployment` has no constructor
@@ -162,7 +162,7 @@ After completing all three deliverables, run:
 
 ```bash
 npm run typecheck
-npx vitest run exercises/react/03-domain-decoding/038-introduce-string-array-domain-decoding
+npx vitest run exercises/react/02-data-boundaries/038-introduce-string-array-domain-decoding
 npx vitest run --exclude 'exercises/typescript/008-consume-job-admission-decision/**'
 ```
 

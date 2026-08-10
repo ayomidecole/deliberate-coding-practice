@@ -186,25 +186,25 @@ Run after each layer:
 
 ```bash
 npm run typecheck
-npx vitest run exercises/react/04-layered-integration/042-integrate-stateful-incident-review/src/types
-npx vitest run exercises/react/04-layered-integration/042-integrate-stateful-incident-review/src/domain
-npx vitest run exercises/react/04-layered-integration/042-integrate-stateful-incident-review/src/components
-npx vitest run exercises/react/04-layered-integration/042-integrate-stateful-incident-review/src/features
+npx vitest run exercises/react/03-layered-integration/042-integrate-stateful-incident-review/src/types
+npx vitest run exercises/react/03-layered-integration/042-integrate-stateful-incident-review/src/domain
+npx vitest run exercises/react/03-layered-integration/042-integrate-stateful-incident-review/src/components
+npx vitest run exercises/react/03-layered-integration/042-integrate-stateful-incident-review/src/features
 ```
 
 Then verify the complete slice:
 
 ```bash
 npm run typecheck
-npx vitest run exercises/react/04-layered-integration/042-integrate-stateful-incident-review
-npx vite build exercises/react/04-layered-integration/042-integrate-stateful-incident-review
+npx vitest run exercises/react/03-layered-integration/042-integrate-stateful-incident-review
+npx vite build exercises/react/03-layered-integration/042-integrate-stateful-incident-review
 npx vitest run --exclude 'exercises/typescript/008-consume-job-admission-decision/**'
 ```
 
 For the browser:
 
 ```bash
-npx vite exercises/react/04-layered-integration/042-integrate-stateful-incident-review --host 127.0.0.1d
+npx vite exercises/react/03-layered-integration/042-integrate-stateful-incident-review --host 127.0.0.1d
 
 Confirm that both incidents render, no incident starts selected, and clicking either review
 button displays its stable ID.

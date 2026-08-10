@@ -121,7 +121,7 @@ After implementing the aliases, run:
 
 ```bash
 npm run typecheck
-npx vitest run exercises/react/02-api-contracts/031-retrieve-shipment-api-contract
+npx vitest run exercises/react/02-data-boundaries/031-retrieve-shipment-api-contract
 npx vitest run --exclude 'exercises/typescript/008-consume-job-admission-decision/**'
 ```
 

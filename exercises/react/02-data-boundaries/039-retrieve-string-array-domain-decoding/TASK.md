@@ -155,7 +155,7 @@ Before editing, run:
 
 ```bash
 npm run typecheck
-npx vitest run exercises/react/03-domain-decoding/039-retrieve-string-array-domain-decoding
+npx vitest run exercises/react/02-data-boundaries/039-retrieve-string-array-domain-decoding
 ```
 
 Both are expected to fail while the class and reader remain incomplete.
@@ -164,7 +164,7 @@ When all three deliverables are complete, run:
 
 ```bash
 npm run typecheck
-npx vitest run exercises/react/03-domain-decoding/039-retrieve-string-array-domain-decoding
+npx vitest run exercises/react/02-data-boundaries/039-retrieve-string-array-domain-decoding
 npx vitest run --exclude 'exercises/typescript/008-consume-job-admission-decision/**'
 ```
 

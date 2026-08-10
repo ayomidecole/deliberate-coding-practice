@@ -125,7 +125,7 @@ After completing both parts, run:
 
 ```bash
 npm run typecheck
-npx vitest run exercises/react/02-api-contracts/032-retrieve-alert-api-contract
+npx vitest run exercises/react/02-data-boundaries/032-retrieve-alert-api-contract
 npx vitest run --exclude 'exercises/typescript/008-consume-job-admission-decision/**'
 ```
 

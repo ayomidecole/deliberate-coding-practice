@@ -127,7 +127,7 @@ Before editing, run:
 
 ```bash
 npm run typecheck
-npx vitest run exercises/react/03-domain-decoding/036-introduce-nullable-domain-decoding
+npx vitest run exercises/react/02-data-boundaries/036-introduce-nullable-domain-decoding
 ```
 
 Typecheck should report that `assigneeName` is not initialized. The focused suite should
@@ -137,7 +137,7 @@ After your edits, run:
 
 ```bash
 npm run typecheck
-npx vitest run exercises/react/03-domain-decoding/036-introduce-nullable-domain-decoding
+npx vitest run exercises/react/02-data-boundaries/036-introduce-nullable-domain-decoding
 npx vitest run --exclude 'exercises/typescript/008-consume-job-admission-decision/**'
 ```
 

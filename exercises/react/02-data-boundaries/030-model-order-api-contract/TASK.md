@@ -138,7 +138,7 @@ After implementing both types, run:
 
 ```bash
 npm run typecheck
-npx vitest run exercises/react/02-api-contracts/030-model-order-api-contract
+npx vitest run exercises/react/02-data-boundaries/030-model-order-api-contract
 npx vitest run --exclude 'exercises/typescript/008-consume-job-admission-decision/**'
 ```
 

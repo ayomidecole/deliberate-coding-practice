@@ -127,7 +127,7 @@ Before editing, run:
 
 ```bash
 npm run typecheck
-npx vitest run exercises/react/03-domain-decoding/033-introduce-order-domain-decoding
+npx vitest run exercises/react/02-data-boundaries/033-introduce-order-domain-decoding
 ```
 
 Typecheck should report that `reference` and `priority` are not initialized. Both focused
@@ -138,7 +138,7 @@ After your edits, run:
 
 ```bash
 npm run typecheck
-npx vitest run exercises/react/03-domain-decoding/033-introduce-order-domain-decoding
+npx vitest run exercises/react/02-data-boundaries/033-introduce-order-domain-decoding
 npx vitest run --exclude 'exercises/typescript/008-consume-job-admission-decision/**'
 ```
 

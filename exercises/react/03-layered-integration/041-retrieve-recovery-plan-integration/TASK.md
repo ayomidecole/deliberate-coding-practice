@@ -182,23 +182,23 @@ Use the table above: shorter recovery targets are more urgent, and exactly 30 is
 
 ```bash
 npm run typecheck
-npx vitest run exercises/react/04-layered-integration/041-retrieve-recovery-plan-integration/src/domain
-npx vitest run exercises/react/04-layered-integration/041-retrieve-recovery-plan-integration/src/features
+npx vitest run exercises/react/03-layered-integration/041-retrieve-recovery-plan-integration/src/domain
+npx vitest run exercises/react/03-layered-integration/041-retrieve-recovery-plan-integration/src/features
 ```
 
 When the learner-owned behavior case passes, run:
 
 ```bash
 npm run typecheck
-npx vitest run exercises/react/04-layered-integration/041-retrieve-recovery-plan-integration
-npx vite build exercises/react/04-layered-integration/041-retrieve-recovery-plan-integration
+npx vitest run exercises/react/03-layered-integration/041-retrieve-recovery-plan-integration
+npx vite build exercises/react/03-layered-integration/041-retrieve-recovery-plan-integration
 npx vitest run --exclude 'exercises/typescript/008-consume-job-admission-decision/**'
 ```
 
 For the browser:
 
 ```bash
-npx vite exercises/react/04-layered-integration/041-retrieve-recovery-plan-integration --host 127.0.0.1
+npx vite exercises/react/03-layered-integration/041-retrieve-recovery-plan-integration --host 127.0.0.1
 ```
 
 Confirm that only Checkout API and Identity provider render, including their trusted

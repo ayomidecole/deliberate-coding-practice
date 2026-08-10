@@ -186,29 +186,29 @@ The supplied type assertion should reject the `unknown` placeholder. After fixin
 type, implement the domain and run:
 
 ```bash
-npx vitest run exercises/react/04-layered-integration/040-integrate-release-gate-workflow/src/domain
+npx vitest run exercises/react/03-layered-integration/040-integrate-release-gate-workflow/src/domain
 ```
 
 All three domain cases should pass before you work on React. Then implement the component
 and feature and run:
 
 ```bash
-npx vitest run exercises/react/04-layered-integration/040-integrate-release-gate-workflow/src/features
+npx vitest run exercises/react/03-layered-integration/040-integrate-release-gate-workflow/src/features
 ```
 
 When your behavior case passes, verify the complete exercise:
 
 ```bash
 npm run typecheck
-npx vitest run exercises/react/04-layered-integration/040-integrate-release-gate-workflow
-npx vite build exercises/react/04-layered-integration/040-integrate-release-gate-workflow
+npx vitest run exercises/react/03-layered-integration/040-integrate-release-gate-workflow
+npx vite build exercises/react/03-layered-integration/040-integrate-release-gate-workflow
 npx vitest run --exclude 'exercises/typescript/008-consume-job-admission-decision/**'
 ```
 
 For the browser check:
 
 ```bash
-npx vite exercises/react/04-layered-integration/040-integrate-release-gate-workflow --host 127.0.0.1
+npx vite exercises/react/03-layered-integration/040-integrate-release-gate-workflow --host 127.0.0.1
 ```
 
 Confirm that only the production and emergency gates appear with their trusted domain

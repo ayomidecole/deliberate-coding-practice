@@ -126,7 +126,7 @@ Before editing, run:
 
 ```bash
 npm run typecheck
-npx vitest run exercises/react/03-domain-decoding/035-retrieve-customer-domain-decoding
+npx vitest run exercises/react/02-data-boundaries/035-retrieve-customer-domain-decoding
 ```
 
 The initial compiler and both focused tests should fail because `Customer` has no fields or
@@ -136,7 +136,7 @@ After your edits, run:
 
 ```bash
 npm run typecheck
-npx vitest run exercises/react/03-domain-decoding/035-retrieve-customer-domain-decoding
+npx vitest run exercises/react/02-data-boundaries/035-retrieve-customer-domain-decoding
 npx vitest run --exclude 'exercises/typescript/008-consume-job-admission-decision/**'
 ```
 
