@@ -1,8 +1,15 @@
 import { useState } from 'react';
 
 import { DeploymentApprovalCard } from '../../components/deployments/deployment-approval-card';
+import type { Deployment } from '../../domain/deployment';
 
-export function ReviewDeploymentFeature() {
+export type ReviewDeploymentFeatureProps = {
+  readonly deployment: Deployment;
+};
+
+export function ReviewDeploymentFeature({
+  deployment,
+}: ReviewDeploymentFeatureProps) {
   const [approvalRequested, setApprovalRequested] = useState(false);
 
   return (
@@ -10,9 +17,10 @@ export function ReviewDeploymentFeature() {
       <h2 id="deployment-review-heading">Review production deployment</h2>
 
       <DeploymentApprovalCard
-        serviceName="Checkout API"
-        targetEnvironment="Production"
-        approvalAvailable={!approvalRequested}
+        deployment={deployment}
+        canRequestApproval={
+          deployment.approvalAvailable && !approvalRequested
+        }
         onApprove={() => setApprovalRequested(true)}
       />
 
