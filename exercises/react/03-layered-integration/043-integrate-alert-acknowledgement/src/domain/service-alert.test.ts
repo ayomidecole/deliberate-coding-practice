@@ -16,5 +16,12 @@ describe('ServiceAlert', () => {
     ).toThrow('severity must be a number');
   });
 
-  it.todo('constructs a trusted service alert');
+  it('constructs a trusted service alert', () => {
+    const serviceAlert = new ServiceAlert(SERVICE_ALERT_API_RECORD)
+
+    expect(serviceAlert.id).toBe('alert-502')
+    expect(serviceAlert.title).toBe('Payment timeout spike')
+    expect(serviceAlert.serviceName).toBe('payments-api')
+    expect(serviceAlert.severity).toBe(1)
+  });
 });
