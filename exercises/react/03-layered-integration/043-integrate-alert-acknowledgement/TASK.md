@@ -1,6 +1,6 @@
 # REACT-043: Integrate Service-Alert Acknowledgement
 
-Status: active
+Status: complete
 
 Target time: 80–110 minutes
 
