@@ -17,5 +17,26 @@ const DEPLOYMENT = new Deployment({
 afterEach(cleanup);
 
 describe('RolloutControlCard', () => {
-  it.todo('requests that an active rollout be paused');
+  it('requests that an active rollout be paused', () => {
+    const onPausedChange = vi.fn();
+
+    render(
+      <RolloutControlCard
+        deployment={DEPLOYMENT}
+        isPaused={false}
+        onPausedChange={onPausedChange}
+      />,
+    );
+
+    expect(screen.getByText('Rollout status: Active')).toBeInTheDocument();
+
+    const button = screen.getByRole('button', {
+      name: 'Pause rollout',
+    });
+
+    fireEvent.click(button);
+
+    expect(onPausedChange).toHaveBeenCalledTimes(1);
+    expect(onPausedChange).toHaveBeenCalledWith(true);
+  });
 });
