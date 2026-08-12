@@ -1,6 +1,5 @@
 import type { MonitoredService } from '../../domain/monitored-service';
 import { Badge } from '../ui/badge';
-import { Spinner } from '../ui/spinner';
 
 export type ServiceHealthSummaryProps = {
     readonly service: MonitoredService;
@@ -16,7 +15,6 @@ export function ServiceHealthSummary({ service }: ServiceHealthSummaryProps) {
             <p>
                 Health:
                 <Badge variant={isDegraded ? 'destructive' : 'secondary'}>
-                    <Spinner data-icon="inline-start" />
                     {isDegraded ? 'Degraded' : 'Healthy'}
                 </Badge>
             </p>
