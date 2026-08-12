@@ -1,6 +1,6 @@
 # REACT-046: Retrieve a shadcn Button Through a Stateful Feature
 
-Status: active
+Status: complete
 
 Target time: 45–60 minutes
 

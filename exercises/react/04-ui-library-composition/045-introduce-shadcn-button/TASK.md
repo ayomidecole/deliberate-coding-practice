@@ -1,6 +1,6 @@
 # REACT-045: Use a shadcn Button in a Business Component
 
-Status: active
+Status: complete
 
 Target time: 30–45 minutes
 
