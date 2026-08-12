@@ -1,6 +1,6 @@
 # REACT-048: Introduce a shadcn Health Badge
 
-Status: active
+Status: complete
 
 Target time: 45–60 minutes
 
