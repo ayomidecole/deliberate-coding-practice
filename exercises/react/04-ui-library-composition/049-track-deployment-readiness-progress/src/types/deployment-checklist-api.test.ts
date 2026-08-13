@@ -1,4 +1,4 @@
-import { describe, it } from 'vitest';
+import { describe, expectTypeOf, it } from 'vitest';
 
 import type { DeploymentChecklistApiRecord } from './deployment-checklist-api';
 
@@ -10,8 +10,7 @@ type ExpectedDeploymentChecklistApiRecord = {
 };
 
 describe('DeploymentChecklistApiRecord', () => {
-  it.todo('matches the complete deployment-checklist wire contract');
+  it('matches the complete deployment-checklist wire contract', () => {
+    expectTypeOf<DeploymentChecklistApiRecord>().toEqualTypeOf<ExpectedDeploymentChecklistApiRecord>();
+  });
 });
-
-void (0 as unknown as DeploymentChecklistApiRecord);
-void (0 as unknown as ExpectedDeploymentChecklistApiRecord);

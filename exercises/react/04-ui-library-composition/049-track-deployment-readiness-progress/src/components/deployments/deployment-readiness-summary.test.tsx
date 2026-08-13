@@ -1,10 +1,11 @@
 // @vitest-environment jsdom
 
-import { cleanup } from '@testing-library/react';
-import { afterEach, describe, it } from 'vitest';
+import { cleanup, render, screen } from '@testing-library/react';
+import { afterEach, describe, expect, it } from 'vitest';
 import '@testing-library/jest-dom/vitest';
 
 import { DeploymentChecklist } from '../../domain/deployment-checklist';
+import { DeploymentReadinessSummary } from './deployment-readiness-summary';
 
 const DEPLOYMENT = new DeploymentChecklist({
   deployment_id: 'deployment-billing-v4',
@@ -16,7 +17,20 @@ const DEPLOYMENT = new DeploymentChecklist({
 afterEach(cleanup);
 
 describe('DeploymentReadinessSummary', () => {
-  it.todo('presents the current checklist progress');
-});
+  it('presents the current checklist progress', () => {
+    render(
+      <DeploymentReadinessSummary
+        deployment={DEPLOYMENT}
+        completedChecks={2}
+      />,
+    );
 
-void DEPLOYMENT;
+    expect(
+      screen.getByRole('heading', { level: 3, name: 'Billing API' }),
+    ).toBeInTheDocument();
+    expect(screen.getByText('2 of 4 checks complete')).toBeInTheDocument();
+    expect(
+      screen.getByRole('progressbar', { name: 'Billing API readiness' }),
+    ).toHaveAttribute('aria-valuenow', '50');
+  });
+});

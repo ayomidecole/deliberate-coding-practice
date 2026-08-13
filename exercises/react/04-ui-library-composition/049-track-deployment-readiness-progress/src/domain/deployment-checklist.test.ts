@@ -10,7 +10,14 @@ const DEPLOYMENT_API_RECORD = {
 };
 
 describe('DeploymentChecklist', () => {
-  it.todo('constructs a trusted deployment checklist');
+  it('constructs a trusted deployment checklist', () => {
+    const deployment = new DeploymentChecklist(DEPLOYMENT_API_RECORD);
+
+    expect(deployment.id).toBe('deployment-billing-v4');
+    expect(deployment.serviceName).toBe('Billing API');
+    expect(deployment.completedChecks).toBe(2);
+    expect(deployment.totalChecks).toBe(4);
+  });
 
   it('rejects completed checks above the total', () => {
     expect(

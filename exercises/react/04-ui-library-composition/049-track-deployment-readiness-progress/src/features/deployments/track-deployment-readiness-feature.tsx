@@ -9,7 +9,32 @@ export type TrackDeploymentReadinessFeatureProps = {
 };
 
 export function TrackDeploymentReadinessFeature(
-  _props: TrackDeploymentReadinessFeatureProps,
+  {deployment}: TrackDeploymentReadinessFeatureProps,
 ) {
-  return null;
+
+  const [completedChecks, setCompletedChecks] = useState(deployment.completedChecks);
+
+  const checksComplete = completedChecks === deployment.totalChecks;
+
+  const checkHandler = () => {
+    setCompletedChecks((current) =>
+      Math.min(current + 1, deployment.totalChecks),
+    );
+  };
+
+  return (
+    <section className='feature-stack' aria-labelledby='readiness-heading'>
+      <h2 id='readiness-heading'>Track deployment readiness</h2>
+      <DeploymentReadinessSummary
+        deployment={deployment}
+        completedChecks={completedChecks}
+      />
+      {checksComplete ? (
+        <Button disabled>All checks complete</Button>
+      ) : (
+        <Button onClick={checkHandler}>Complete next check</Button>
+      )}
+
+    </section>
+  );
 }
