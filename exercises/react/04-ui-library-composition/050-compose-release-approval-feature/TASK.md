@@ -18,6 +18,10 @@ app, local shadcn source, routine tests, styling, and configuration are supplied
 one complex business component, the feature that coordinates two business components, and
 the central feature behavior test.
 
+This is also the first exercise using the project's chosen Sera design-system preset.
+Its tokens, fonts, icons, and generated primitives are supplied; your responsibility is
+to consume that shared visual language through documented component APIs.
+
 ## Mental model
 
 There are three different levels of composition:
@@ -183,6 +187,7 @@ the Card's Badge and the separate action component from the same feature state.
 
 ## Official documentation
 
+- [Project's shadcn preset](https://ui.shadcn.com/create?preset=b5nhg0PRgm)
 - [shadcn Card](https://ui.shadcn.com/docs/components/base/card)
 - [shadcn Badge](https://ui.shadcn.com/docs/components/base/badge)
 - [shadcn Progress](https://ui.shadcn.com/docs/components/base/progress)
