@@ -1,6 +1,6 @@
 # REACT-050: Compose a Release Approval Feature
 
-Status: active
+Status: complete
 
 Target time: 75–90 minutes
 
@@ -172,6 +172,7 @@ Run:
 
 ```bash
 npx vitest run exercises/react/04-ui-library-composition/050-compose-release-approval-feature
+npx tsc --noEmit -p exercises/react/04-ui-library-composition/050-compose-release-approval-feature/tsconfig.json
 npm run typecheck
 npx vite build exercises/react/04-ui-library-composition/050-compose-release-approval-feature
 ```
