@@ -91,10 +91,25 @@ npm run check:go
 
 ## Documentation
 
-- [A Tour of Go: structs](https://go.dev/tour/moretypes/2)
-- [A Tour of Go: methods](https://go.dev/tour/methods/1)
-- [Go: return and handle errors](https://go.dev/doc/tutorial/handle-errors)
-- [Go `testing`](https://pkg.go.dev/testing)
+Use now, in this order:
+
+1. [A Tour of Go: structs](https://go.dev/tour/moretypes/2) — defining
+   `AdmissionDecision`.
+2. [A Tour of Go: struct literals](https://go.dev/tour/moretypes/5) — constructing the
+   returned decision with named fields.
+3. [Organizing a Go module](https://go.dev/doc/modules/layout) — folders as packages and
+   importing one package from another. The names `models` and `services` are our project
+   convention, not special Go keywords.
+4. [A Tour of Go: methods](https://go.dev/tour/methods/1) — the service method and its
+   receiver.
+5. [Go: return and handle errors](https://go.dev/doc/tutorial/handle-errors) — returning
+   the named validation error.
+6. [Go `testing`](https://pkg.go.dev/testing) — reference for your queued-decision test.
+
+Gin is intentionally not used in GO-031. Its official
+[routing](https://gin-gonic.com/en/docs/routing/) and
+[binding](https://gin-gonic.com/en/docs/binding/bind-query-or-post/) documentation becomes
+relevant when the next exercise adds the handler layer.
 
 The contract above is the primary guidance.
 
