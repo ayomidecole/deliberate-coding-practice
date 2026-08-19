@@ -36,5 +36,28 @@ const BLOCKED_DEPLOYMENT = new DeploymentRollback({
 afterEach(cleanup);
 
 describe('ManageDeploymentBlockerFeature', () => {
-  it.todo('reviews a rollback plan and starts the rollback workflow');
+  it('reviews a rollback plan and starts the rollback workflow', () => {
+    render(<ManageDeploymentBlockerFeature deployment={BLOCKED_DEPLOYMENT} />);
+
+    expect(screen.getByText('Deployment blocked')).toBeInTheDocument();
+    expect(
+      screen.getByRole('row', { name: /Error-rate budget/i }),
+    ).toBeInTheDocument();
+
+    fireEvent.click(screen.getByRole('button', { name: 'Review rollback plan' }));
+
+    expect(
+      screen.getByRole('dialog', { name: 'Rollback plan for Checkout API' }),
+    ).toBeInTheDocument();
+
+    fireEvent.click(screen.getByRole('button', { name: 'Start rollback' }));
+
+    expect(
+      screen.queryByRole('dialog', { name: 'Rollback plan for Checkout API' }),
+    ).not.toBeInTheDocument();
+    expect(screen.getByText('Rollback in progress')).toBeInTheDocument();
+    expect(
+      screen.getByRole('button', { name: 'Rollback started' }),
+    ).toBeDisabled();
+  });
 });
