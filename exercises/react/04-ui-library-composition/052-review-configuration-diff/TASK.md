@@ -4,195 +4,181 @@ Status: active
 
 Target time: 120–150 minutes
 
-Primary capability: integrate a specialized third-party renderer behind an application-
-owned component, then coordinate it inside a business feature
+Primary capability: contain a specialized third-party renderer behind an application-owned
+component, then compose it into a feature
 
 ## Goal
 
-Build a production-shaped configuration review interface. An operator must compare the
-current and proposed versions of a production configuration, switch between split and
-unified layouts, and mark the change as reviewed.
+Build a configuration review interface where an operator can:
 
-This is the one deliberately deeper diff task. It does **not** begin a diff sub-arc. The
-lasting skill is learning how to read an unfamiliar component library, adapt application
-data to its protocol, contain that protocol behind your own component, and compose the
-result into an existing feature architecture.
+1. compare the current and proposed versions of a production configuration,
+2. switch between split and unified diff layouts, and
+3. mark the change as reviewed.
 
-The API contract, domain decoder, app fixture, shadcn source, summary Card, mode control,
-review Button, component tests, styles, configuration, memoization shell, and unfamiliar
-library mock setup are supplied. You own:
+This is one deliberately deeper diff task, not the beginning of a diff sub-arc. The lasting
+skill is adapting an unfamiliar library to our application boundaries.
 
-- the diff library's preparation pipeline inside the adapter,
-- feature-owned layout and review state,
-- the multi-component feature composition, and
-- one central behavior test.
+## What is supplied and what you own
 
-## Two separate pictures
+Supplied:
 
-The last task mixed component nesting and state flow. Keep these pictures separate here.
+- API contract and domain decoder,
+- app data and styles,
+- shadcn Card, Badge, and Button components,
+- summary, mode-control, and review-action business components,
+- `useMemo`, `DiffView`, and the renderer's mode mapping,
+- routine component tests and the unfamiliar library mock setup.
 
-### Component tree: what renders inside what
-
-```text
-ReviewConfigurationDiffFeature
-├── ConfigurationChangeSummary       supplied Card + Badge
-├── diff toolbar
-│   ├── DiffModeControl               supplied Buttons
-│   └── ReviewAction                  supplied Button
-└── ConfigurationDiffViewer          your application-owned adapter
-    └── DiffView                      third-party renderer
-```
-
-### Data flow: who owns changing values
-
-```text
-viewMode state ──► DiffModeControl ──onValueChange──► feature setter
-       │
-       └────────► ConfigurationDiffViewer
-
-isReviewed state ──► Summary + ReviewAction ──onReview──► feature setter
-```
-
-The feature owns workflow state because sibling components need it. The adapter owns no
-workflow state; it translates one domain object plus one view-mode prop into the vendor's
-objects and props.
-
-## The new library protocol
-
-This sequence is specific to `@git-diff-view`; it is not a general React ritual:
-
-```text
-ConfigurationChange domain object
-        │
-        ▼
-generateDiffFile(before version, after version)
-        │
-        ▼
-initialize theme → initialize diff → build requested line layout
-        │
-        ▼
-DiffFile instance ──► React DiffView
-```
-
-`generateDiffFile` compares two complete file contents. It does not require you to write a
-Git patch. Its six required arguments are:
-
-| Position | Value from `change` |
-|---|---|
-| 1 | old file name: `fileName` |
-| 2 | old file content: `beforeContent` |
-| 3 | new file name: `fileName` |
-| 4 | new file content: `afterContent` |
-| 5 | old language: `language` |
-| 6 | new language: `language` |
-
-After generation, call these operations in order:
-
-1. `initTheme('light')`
-2. `init()`
-3. `buildSplitDiffLines()` **or** `buildUnifiedDiffLines()`, based on `viewMode`
-4. return the prepared `DiffFile`
-
-There are two mode-related jobs. The builder prepares the correct rows on the `DiffFile`.
-The already-supplied `DiffModeEnum` mapping tells the React renderer which layout to show.
-Both must agree.
-
-The supplied `useMemo` shell keeps this potentially expensive preparation from running on
-unrelated renders. It reruns when the domain object or layout mode changes. Memoization is
-infrastructure here, not a new operation you must author.
-
-## Scope preflight
-
-| Required operation | Classification | Evidence or support |
-|---|---|---|
-| Read supplied API/domain data | demonstrated | REACT-040–051 |
-| Compose Card, Badge, and Button business components | demonstrated | REACT-045–051 |
-| Own state and coordinate sibling components | guided retrieval | REACT-050–051; explicit tree and data-flow diagrams above |
-| Author an observable feature test | transferred | REACT-044–050; unfamiliar vendor mock is supplied |
-| Generate, initialize, and layout a vendor `DiffFile` | **new operation** | mental model, argument table, ordered calls, official docs, and supplied adapter test |
-| Render the prepared file through `DiffView` | part of the same new boundary | imports, enum mapping, props, CSS import, and JSX shell supplied |
-
-There is one unfamiliar implementation boundary. The test harness does not add another.
-
-## Work order
-
-Edit only these three files, in this order:
+You will edit only these files, in this order:
 
 1. `src/components/configuration-changes/configuration-diff-viewer.tsx`
 2. `src/features/configuration-changes/review-configuration-diff-feature.tsx`
 3. `src/features/configuration-changes/review-configuration-diff-feature.test.tsx`
 
-Do not edit the domain, API type, supplied business components or their tests, generated UI
-source, app, styles, package files, or configuration.
+## Scope preflight
 
-### 1. Complete the application-owned diff adapter
+| Operation | Classification | Support |
+|---|---|---|
+| Read supplied API/domain data | demonstrated | REACT-040–051 |
+| Compose Card, Badge, and Button components | demonstrated | REACT-045–051 |
+| Coordinate sibling components with feature state | guided retrieval | REACT-050–051 and the diagram below |
+| Author an observable feature test | transferred | REACT-044–050; vendor mock supplied |
+| Generate and prepare the library's `DiffFile` object | **new** | complete mental model, call order, tests, and official docs below |
 
-In `createPreparedDiff`:
+There is one new implementation boundary. You are not authoring new test infrastructure.
 
-- remove the placeholder `void` statements and thrown error,
-- call `generateDiffFile` with the six values in the table,
-- initialize the returned object in the required order,
-- build split lines for `viewMode === 'split'`; otherwise build unified lines, and
-- return the prepared object.
+## Step 1: Complete `configuration-diff-viewer.tsx`
 
-Keep the supplied `useMemo`, accessible region, `DiffView`, enum mapping, light theme, line
-wrapping, and package CSS import unchanged.
+### What `DiffFile` means
 
-The supplied adapter tests are intentionally direct: they prove the exact vendor calls for
-both modes while mocking the real renderer. You are responsible for making those tests pass,
-not for authoring or editing that unfamiliar mock harness.
+`DiffFile` is not a file on disk. It is an in-memory object created by the library:
 
-### 2. Compose the business feature
+```text
+beforeContent + afterContent
+             │
+             ▼
+     generateDiffFile(...)
+             │
+             ▼
+ prepared DiffFile object ──► <DiffView diffFile={diffFile} />
+```
 
-Complete `ReviewConfigurationDiffFeature`:
+Your application owns `ConfigurationDiffViewer`. Its job is to translate our
+`ConfigurationChange` domain object into that vendor object. The feature should never need
+to know how the vendor object is built.
 
-- import `useState` and the four business components shown in the tree,
-- import the `DiffViewMode` type,
-- initialize `viewMode` as typed state with `'split'`,
-- initialize `isReviewed` from whether `change.reviewStatus === 'reviewed'`,
-- write a mode handler that stores its `DiffViewMode` argument,
-- write a review handler that stores `true`,
-- keep the supplied section and heading,
-- render `ConfigurationChangeSummary` with `change` and `isReviewed`,
-- create `<div className="diff-toolbar">` containing `DiffModeControl` and
-  `ReviewAction`, and
-- render `ConfigurationDiffViewer` with `change` and `viewMode`.
+### Your first edit: create the object
 
-Do not store the prepared `DiffFile` in feature state, mutate the readonly domain object,
-put vendor calls in the feature, duplicate business-component markup, or define components
-inside the feature.
+Inside `createPreparedDiff`, call the already-imported `generateDiffFile` function and store
+its returned object in a variable named `diffFile`.
 
-### 3. Author the central workflow test
+Pass these six arguments in exactly this order:
 
-The test already supplies the jsdom environment, domain fixture, cleanup, and a mock diff
-adapter. Replace the todo with one test that:
+1. `change.fileName` — old file name
+2. `change.beforeContent` — old file contents
+3. `change.fileName` — new file name
+4. `change.afterContent` — new file contents
+5. `change.language` — old file language
+6. `change.language` — new file language
 
-1. renders `ReviewConfigurationDiffFeature` with `PENDING_CHANGE`,
-2. proves `Review pending` and the region named `checkout-config.ts split diff` are present,
-3. proves the `Split view` Button has `aria-pressed="true"`,
-4. clicks `Unified view`,
-5. proves the region is now named `checkout-config.ts unified diff` and that Button is
-   pressed,
-6. clicks `Mark as reviewed`, and
-7. proves `Reviewed` is present and `Change reviewed` is disabled.
+Both names and both languages repeat because this change compares two versions of the same
+configuration file.
 
-Update the Testing Library and Vitest imports as required. Test observable behavior; do not
-inspect React state, call handlers directly, or test the vendor's internal DOM here.
+### Your second edit: prepare the object
 
-## Five-minute start gate
+After creating `diffFile`, call these operations in order:
 
-Your first three edits are identifiable:
+1. `diffFile.initTheme('light')`
+2. `diffFile.init()`
+3. If `viewMode === 'split'`, call `diffFile.buildSplitDiffLines()`.
+4. Otherwise, call `diffFile.buildUnifiedDiffLines()`.
+5. Return `diffFile`.
 
-1. Replace the adapter placeholder with a `const diffFile = generateDiffFile(...)` call
-   using the argument table.
-2. Add the theme and initialization calls, then the split/unified branch and return.
-3. In the feature, add the imports and initialize the two state values.
+That is the entire implementation you own in this file. Keep the supplied `useMemo`,
+`DiffModeEnum` mapping, `<DiffView>`, accessible region, line wrapping, and CSS import.
 
-The likely stuck point is thinking the enum mapping alone changes the prepared data. Remember:
-the `DiffFile` builder prepares rows; `DiffView` renders the matching layout. If a supplied
-adapter test fails, read which of those two jobs it is describing before changing code.
+Why are there two mode-related operations?
 
-## Verification
+- `buildSplitDiffLines` or `buildUnifiedDiffLines` prepares the rows stored in `DiffFile`.
+- The supplied `DiffModeEnum` value tells the React renderer how to display those rows.
+
+The two choices must agree. This preparation sequence is specific to `@git-diff-view`; it
+is not generic React boilerplate.
+
+### Checkpoint for Step 1
+
+Run:
+
+```bash
+npx vitest run exercises/react/04-ui-library-composition/052-review-configuration-diff/src/components/configuration-changes/configuration-diff-viewer.test.tsx
+```
+
+Both supplied adapter tests should pass before you open the feature file.
+
+## Step 2: Complete `review-configuration-diff-feature.tsx`
+
+This feature coordinates four business components:
+
+```text
+ReviewConfigurationDiffFeature          owns viewMode and isReviewed
+├── ConfigurationChangeSummary
+├── diff-toolbar
+│   ├── DiffModeControl
+│   └── ReviewAction
+└── ConfigurationDiffViewer
+```
+
+The changing values flow like this:
+
+```text
+viewMode ──► DiffModeControl ──onValueChange──► feature state
+    │
+    └──────► ConfigurationDiffViewer
+
+isReviewed ──► Summary + ReviewAction ──onReview──► feature state
+```
+
+Complete the file in this order:
+
+1. Import `useState`.
+2. Import `ConfigurationChangeSummary`, `DiffModeControl`, `ReviewAction`, and
+   `ConfigurationDiffViewer`.
+3. Import the `DiffViewMode` type.
+4. Initialize typed `viewMode` state to `'split'`.
+5. Initialize `isReviewed` from `change.reviewStatus === 'reviewed'`.
+6. Add a handler that receives a `DiffViewMode` and stores it.
+7. Add a review handler that stores `true`.
+8. Keep the supplied section and heading.
+9. Render `ConfigurationChangeSummary` with `change` and `isReviewed`.
+10. Render `<div className="diff-toolbar">` containing:
+    - `DiffModeControl` with the mode value and mode handler,
+    - `ReviewAction` with the reviewed value and review handler.
+11. Render `ConfigurationDiffViewer` with `change` and `viewMode`.
+
+Do not put vendor-library calls in this feature, store `diffFile` in state, mutate the
+readonly domain object, or rewrite the supplied business-component markup.
+
+## Step 3: Write the feature workflow test
+
+Open `review-configuration-diff-feature.test.tsx`. The jsdom environment, domain fixture,
+cleanup, and mock diff adapter are already supplied. Update the imports you need and replace
+the todo with one test proving this sequence:
+
+1. Render the feature with `PENDING_CHANGE`.
+2. `Review pending` is present.
+3. The region named `checkout-config.ts split diff` is present.
+4. `Split view` has `aria-pressed="true"`.
+5. Click `Unified view`.
+6. The region is now named `checkout-config.ts unified diff`.
+7. `Unified view` has `aria-pressed="true"`.
+8. Click `Mark as reviewed`.
+9. `Reviewed` is present.
+10. `Change reviewed` is disabled.
+
+Test only observable behavior. Do not inspect React state, invoke handlers directly, or
+assert against the third-party renderer's internal DOM.
+
+## Full verification
 
 Run from the workspace root:
 
@@ -209,17 +195,16 @@ Then preview:
 npx vite exercises/react/04-ui-library-composition/052-review-configuration-diff --host 127.0.0.1
 ```
 
-The browser must show a real code diff. Split and unified controls must change its layout.
-Marking the change reviewed must update the Badge and disable the action without changing
-the readonly domain object.
+The browser must show a real code diff. The layout controls must switch it between split and
+unified views. Marking the change reviewed must update the Badge and disable the action.
 
-The specialized renderer currently creates a large production chunk. That is a real
-integration tradeoff, not part of this exercise's implementation: route-level lazy loading
-belongs to the later page/application-composition work.
+The renderer currently creates a large production chunk. Route-level lazy loading is a real
+future consideration, but it belongs to the later page/application-composition boundary and
+is not part of this exercise.
 
 ## Official documentation
 
-- [git-diff-view repository and quick start](https://github.com/MrWangJustToDo/git-diff-view)
+- [git-diff-view quick start](https://github.com/MrWangJustToDo/git-diff-view)
 - [React renderer package](https://github.com/MrWangJustToDo/git-diff-view/tree/main/packages/react)
 - [File comparison package](https://github.com/MrWangJustToDo/git-diff-view/tree/main/packages/file)
 - [React `useMemo`](https://react.dev/reference/react/useMemo)
@@ -231,9 +216,9 @@ belongs to the later page/application-composition work.
 
 ## Completion
 
-Report what help you used. Completion requires the learner-authored central behavior test,
-all supplied tests, exercise and root typechecks, production build, and browser behavior.
+Report what help you used. Completion requires the learner-authored workflow test, all
+supplied tests, both typechecks, production build, and browser behavior.
 
-System-design lesson to carry forward: third-party component APIs should terminate at an
-application-owned adapter. Features coordinate business state through your stable props and
-callbacks; they should not know how a vendor creates, initializes, or renders its objects.
+System-design lesson: third-party APIs should terminate at an application-owned adapter.
+Features coordinate business state through stable application props and callbacks; they do
+not need to know how a vendor constructs or renders its internal objects.

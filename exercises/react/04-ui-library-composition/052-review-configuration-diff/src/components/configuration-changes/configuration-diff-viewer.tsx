@@ -18,11 +18,25 @@ function createPreparedDiff(
   change: ConfigurationChange,
   viewMode: DiffViewMode,
 ): DiffFile {
-  void change;
-  void viewMode;
-  void generateDiffFile;
+  const diffFile = generateDiffFile(
+    change.fileName,
+    change.beforeContent,
+    change.fileName,
+    change.afterContent,
+    change.language,
+    change.language
+  )
 
-  throw new Error('Prepare the configuration diff');
+  diffFile.initTheme('light')
+  diffFile.init()
+
+  if (viewMode === 'split') {
+    diffFile.buildSplitDiffLines()
+  } else {
+    diffFile.buildUnifiedDiffLines()
+  }
+
+  return diffFile
 }
 
 export function ConfigurationDiffViewer({

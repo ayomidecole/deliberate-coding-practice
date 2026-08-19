@@ -1,8 +1,8 @@
 // @vitest-environment jsdom
 
 import type { ReactNode } from 'react';
-import { cleanup } from '@testing-library/react';
-import { afterEach, describe, it, vi } from 'vitest';
+import { cleanup, fireEvent, render, screen } from '@testing-library/react';
+import { afterEach, describe, expect, it, vi } from 'vitest';
 import '@testing-library/jest-dom/vitest';
 
 vi.mock(
@@ -21,6 +21,7 @@ vi.mock(
 );
 
 import { ConfigurationChange } from '../../domain/configuration-change';
+import { ReviewConfigurationDiffFeature } from './review-configuration-diff-feature';
 
 const PENDING_CHANGE = new ConfigurationChange({
   change_id: 'change-checkout-timeouts',
@@ -36,7 +37,31 @@ const PENDING_CHANGE = new ConfigurationChange({
 afterEach(cleanup);
 
 describe('ReviewConfigurationDiffFeature', () => {
-  it.todo('switches the diff layout and completes the review workflow');
-});
+  it('switches the diff layout and completes the review workflow', () => {
+    render(<ReviewConfigurationDiffFeature change={PENDING_CHANGE} />);
 
-void PENDING_CHANGE;
+    expect(screen.getByText('Review pending')).toBeInTheDocument();
+    expect(
+      screen.getByRole('region', { name: 'checkout-config.ts split diff' }),
+    ).toBeInTheDocument();
+
+    const splitViewButton = screen.getByRole('button', { name: 'Split view' });
+    expect(splitViewButton).toHaveAttribute('aria-pressed', 'true');
+
+    fireEvent.click(screen.getByRole('button', { name: 'Unified view' }));
+
+    expect(
+      screen.getByRole('region', { name: 'checkout-config.ts unified diff' }),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByRole('button', { name: 'Unified view' }),
+    ).toHaveAttribute('aria-pressed', 'true');
+
+    fireEvent.click(screen.getByRole('button', { name: 'Mark as reviewed' }));
+
+    expect(screen.getByText('Reviewed')).toBeInTheDocument();
+    expect(
+      screen.getByRole('button', { name: 'Change reviewed' }),
+    ).toBeDisabled();
+  });
+});
