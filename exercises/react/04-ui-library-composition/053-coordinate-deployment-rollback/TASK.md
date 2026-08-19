@@ -1,6 +1,6 @@
 # REACT-053: Coordinate a Deployment Rollback
 
-Status: active
+Status: complete
 
 Target time: 90–120 minutes
 
