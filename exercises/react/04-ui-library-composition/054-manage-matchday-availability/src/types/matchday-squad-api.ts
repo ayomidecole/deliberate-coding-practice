@@ -1,17 +1,17 @@
 export type MatchdayPlayerApiRecord = {
-  readonly player_id: unknown;
-  readonly display_name: unknown;
-  readonly shirt_number: unknown;
-  readonly position: unknown;
-  readonly availability: unknown;
-  readonly medical_note: unknown;
+    readonly fixture_id: string;
+    readonly team_name: string;
+    readonly opponent_name: string;
+    readonly competition: string;
+    readonly kickoff_label: string;
+    readonly players: readonly MatchdayPlayerApiRecord[];
 };
 
 export type MatchdaySquadApiRecord = {
-  readonly fixture_id: unknown;
-  readonly team_name: unknown;
-  readonly opponent_name: unknown;
-  readonly competition: unknown;
-  readonly kickoff_label: unknown;
-  readonly players: readonly MatchdayPlayerApiRecord[];
+    readonly player_id: string;
+    readonly display_name: string;
+    readonly shirt_number: number
+    readonly position: 'GK' | 'DEF' | 'MID' | 'FWD'
+    readonly availability: 'cleared' | 'review_required' | 'unavailable'
+    readonly medical_note: string
 };

@@ -1,0 +1,7 @@
+{
+  "extends": "./tsconfig.json",
+  "include": [
+    "src/types/matchday-squad-api.ts",
+    "type-tests/matchday-squad-api.contract.mts"
+  ]
+}

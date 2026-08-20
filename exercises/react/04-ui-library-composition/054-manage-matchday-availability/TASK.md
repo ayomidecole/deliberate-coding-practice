@@ -29,14 +29,37 @@ You own every target implementation file:
 - `src/components/matchday/player-review-sheet.tsx`
 - `src/features/matchday/manage-matchday-availability-feature.tsx`
 
-Routine imports, prop contracts, application mounting, fixtures, styles, shadcn source,
-and the complete test suite are supplied. Do not edit the tests or supplied infrastructure.
+Routine imports, component prop contracts, application mounting, fixtures, styles, shadcn
+source, and the complete test suite are supplied. The two `Record<string, unknown>` aliases
+in the API file are compilation placeholders, not completed types. Do not edit the tests or
+supplied infrastructure.
+
+## How to use this task
+
+Treat this as four connected milestones, not one large coding session:
+
+- [ ] wire contract compiles against its supplied contract check,
+- [ ] domain decoder tests pass,
+- [ ] each business component test passes, and
+- [ ] the feature workflow and full verification pass.
+
+Finish a milestone before debugging the next one. The component and feature tests construct
+the domain object, so an unfinished decoder can make every later test fail before React even
+renders. In that situation, return to the domain checkpoint instead of debugging JSX.
+
+The requirements below define inputs, outputs, visible behavior, and ownership. Unless an
+exact string, semantic element, or library prop is part of the contract, choose your own
+variable names and implementation structure.
+
+Start with the JSON payload in Boundary 1 open beside the API type file. Your first three
+steps are to author the player record, author the containing squad record, and then run the
+supplied contract check. Do not open the fixture or domain file until that check passes.
 
 ## Scope preflight
 
 | Operation | Capability evidence | Treatment here |
 |---|---|---|
-| Model a readonly snake_case wire contract | retrieved | independent retrieval |
+| Model a readonly snake_case wire contract | retrieved | author both shapes from supplied JSON |
 | Decode nested API records into readonly domain objects | retrieved | independent retrieval |
 | Pass domain values through business components | integrated | transfer |
 | Derive rows and counts from state during render | retrieved | transfer |
@@ -78,26 +101,64 @@ Only a `review_required` player can be opened for review. Clearing Leon changes 
 effective availability to `cleared`, closes the Sheet, and changes the summary from
 `2 of 4 players cleared` to `3 of 4 players cleared`.
 
-## Boundary 1: API contract
+## Boundary 1: author the API contract
 
-In `matchday-squad-api.ts`, replace every temporary `unknown` with the actual wire type.
-Keep the supplied snake_case names and `readonly` modifiers.
+Imagine that the backend returned this abridged JSON response. One representative player
+is shown; the supplied runtime fixture contains four players with the same record shape.
 
-| Wire field | Type |
-|---|---|
-| fixture, team, opponent, competition, kickoff, player id, player name, medical note | `string` |
-| shirt number | `number` |
-| position | `'GK' \| 'DEF' \| 'MID' \| 'FWD'` |
-| availability | `'cleared' \| 'review_required' \| 'unavailable'` |
-| players | readonly array of player API records |
+```json
+{
+  "fixture_id": "fixture-riv-har-2049",
+  "team_name": "Riverside Athletic",
+  "opponent_name": "Harbour City",
+  "competition": "Premier Division",
+  "kickoff_label": "Saturday · 17:30",
+  "players": [
+    {
+      "player_id": "player-mateo-silva",
+      "display_name": "Mateo Silva",
+      "shirt_number": 1,
+      "position": "GK",
+      "availability": "cleared",
+      "medical_note": "Completed the full goalkeeper session."
+    }
+  ]
+}
+```
+
+Input: this external JSON payload.
+
+Output: two explicit readonly object types describing exactly what arrives over the wire.
+
+Delete the permissive `Record<string, unknown>` placeholders and author both type aliases
+from scratch in `src/types/matchday-squad-api.ts`. Preserve the JSON's snake_case field names.
+Use its values to infer ordinary `string` and `number` fields, with these schema rules that
+one response example cannot prove:
+
+- position is `'GK' | 'DEF' | 'MID' | 'FWD'`,
+- availability is `'cleared' | 'review_required' | 'unavailable'`, and
+- `players` is a readonly array of `MatchdayPlayerApiRecord`.
+
+Do not import domain types here. The API contract describes the external wire shape; the
+domain boundary will translate it later.
 
 Checkpoint:
 
 ```bash
+npx tsc --noEmit -p exercises/react/04-ui-library-composition/054-manage-matchday-availability/tsconfig.contract.json
 npx vitest run exercises/react/04-ui-library-composition/054-manage-matchday-availability/src/types
 ```
 
-## Boundary 2: domain decoding
+The first command is the meaningful type check. The contract-check file is supplied and is
+not yours to edit. Before you implement the aliases, its two expected failures say
+`Type 'false' does not satisfy the constraint 'true'`; both disappear when the shapes match.
+
+## Boundary 2: build the domain boundary
+
+Input: an `unknown` wire value.
+
+Output: a validated `MatchdaySquad` whose application-facing properties are readonly and
+camelCase.
 
 Complete both constructors in `matchday-squad.ts` using only the supplied readers.
 
@@ -116,7 +177,10 @@ Checkpoint:
 npx vitest run exercises/react/04-ui-library-composition/054-manage-matchday-availability/src/domain
 ```
 
-## Boundary 3: business components
+## Boundary 3: build the business components
+
+Work in the order below. Each component receives prepared values and reports intent; none
+owns the medical-review workflow.
 
 ### MatchdaySquadSummary
 
@@ -128,6 +192,12 @@ Build a semantic header using the supplied `fixture-summary` styles:
 - a Badge reading `{clearedCount} of {total players} players cleared`.
 
 Use the Badge's `default` variant only when everyone is cleared; otherwise use `secondary`.
+
+Checkpoint:
+
+```bash
+npx vitest run exercises/react/04-ui-library-composition/054-manage-matchday-availability/src/components/matchday/matchday-squad-summary.test.tsx
+```
 
 ### PlayerAvailabilityTable — new Table protocol
 
@@ -146,7 +216,7 @@ Table
 ```
 
 The five columns are **Player**, **Shirt**, **Position**, **Availability**, and **Action**.
-Use `player.id` as each row key. Give the Table the supplied accessible name, and use
+Use `player.id` as each row key. Give the Table `aria-label="Player availability"`, and use
 `Matchday player availability` as its caption.
 
 Presentation mapping:
@@ -159,6 +229,12 @@ Presentation mapping:
 
 The review Button reports `player.id` through `onReviewPlayer`. The table owns no state and
 does not change a player.
+
+Checkpoint:
+
+```bash
+npx vitest run exercises/react/04-ui-library-composition/054-manage-matchday-availability/src/components/matchday/player-availability-table.test.tsx
+```
 
 ### PlayerReviewSheet
 
@@ -178,13 +254,17 @@ Remove the temporary `void` statements from all three components.
 Checkpoint:
 
 ```bash
-npx vitest run exercises/react/04-ui-library-composition/054-manage-matchday-availability/src/components/matchday
+npx vitest run exercises/react/04-ui-library-composition/054-manage-matchday-availability/src/components/matchday/player-review-sheet.test.tsx
 ```
 
 ## Boundary 4: feature coordination
 
-Complete `ManageMatchdayAvailabilityFeature`. This is the owner of the workflow, not a
-markup copy of the three business components.
+Input: one immutable `MatchdaySquad` domain object.
+
+Output: a coordinated workspace whose summary, table, and Sheet agree after every action.
+
+`ManageMatchdayAvailabilityFeature` owns the workflow. The following are business-state
+requirements, not prescribed handler or variable names.
 
 State starts as:
 
@@ -224,10 +304,19 @@ Checkpoint:
 npx vitest run exercises/react/04-ui-library-composition/054-manage-matchday-availability/src/features
 ```
 
+If this fails, identify which boundary produced the wrong value: decoded domain data,
+derived feature data, rendered component output, or an event callback. Avoid changing
+multiple layers at once.
+
 ## Full verification
+
+Before running everything, all four milestone checkboxes near the top should be accounted
+for. The full run verifies their integration; it is not the best place to diagnose the
+first unfinished boundary.
 
 ```bash
 npx vitest run exercises/react/04-ui-library-composition/054-manage-matchday-availability
+npx tsc --noEmit -p exercises/react/04-ui-library-composition/054-manage-matchday-availability/tsconfig.contract.json
 npx tsc --noEmit -p exercises/react/04-ui-library-composition/054-manage-matchday-availability/tsconfig.json
 npm run typecheck
 npx vite build exercises/react/04-ui-library-composition/054-manage-matchday-availability
@@ -254,4 +343,6 @@ cleared`.
 ## Completion
 
 Report what help or references you used. Completion requires the supplied tests, both
-typechecks, production build, and browser workflow to pass.
+exercise typechecks, workspace typecheck, production build, and browser workflow to pass.
+When requesting review, include the last checkpoint that passed so any failure can be
+traced from the correct boundary.

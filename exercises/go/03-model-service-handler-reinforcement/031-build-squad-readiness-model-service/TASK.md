@@ -1,30 +1,32 @@
-# GO-031: Rebuild a Job Admission Model and Service
+# GO-031: Build a Squad Readiness Model and Service
 
 Target time: 35–50 minutes  
 Primary focus: reconnect model ownership to service behavior
 
 ## Goal
 
-Define the result of a job-admission decision in `models`, then implement the business
-decision in `services`.
+Riverside Athletic needs to decide whether enough players are available to prepare a
+matchday squad. Define the decision result in `models`, then implement the business rule
+in `services`.
 
 ```text
-constants/   supplied admitted and queued status values
-models/      shared shape of an admission decision
-services/    validation and admission decision
+constants/   supplied ready and incomplete status values
+models/      shared shape of a squad-readiness result
+services/    validation and readiness decision
 ```
 
-There is no HTTP work in this exercise. A handler will be added only after this connection
-is independently rebuilt.
+There is no HTTP work in this exercise. A handler will be added only after this
+model-to-service connection has been independently rebuilt.
 
 ## Mental model
 
 ```text
-job inputs → service applies rules → models.AdmissionDecision
+fixture and player counts → service applies rules → models.SquadReadiness
 ```
 
-- The model says **what data an admission decision contains**.
+- The model defines **what data a readiness result contains**.
 - The service decides **which values belong in that model**.
+- The constants package supplies the allowed status vocabulary.
 
 The model contains no calculations. The service contains no Gin or HTTP code.
 
@@ -32,31 +34,31 @@ The model contains no calculations. The service contains no Gin or HTTP code.
 
 ### 1. Define the model
 
-In `models/admission_decision.go`, define `AdmissionDecision` with:
+In `models/squad_readiness.go`, define `SquadReadiness` with:
 
-- `JobID string`
-- `RequiredWorkers int`
-- `AvailableWorkers int`
+- `FixtureID string`
+- `RequiredPlayers int`
+- `AvailablePlayers int`
 - `Status string`
 
 ### 2. Implement the service
 
-Replace the placeholder body of `AdmissionService.DecideAdmission` in
-`services/admission_service.go`.
+Replace the placeholder body of `SquadReadinessService.DecideReadiness` in
+`services/squad_readiness_service.go`.
 
 | Situation | Result |
 |---|---|
-| `requiredWorkers <= 0` | empty decision and `ErrInvalidWorkerRequirement` |
-| `availableWorkers >= requiredWorkers` | complete decision with `constants.StatusAdmitted` |
-| `availableWorkers < requiredWorkers` | complete decision with `constants.StatusQueued` |
+| `requiredPlayers <= 0` | empty result and `ErrInvalidPlayerRequirement` |
+| `availablePlayers >= requiredPlayers` | complete result with `constants.StatusReady` |
+| `availablePlayers < requiredPlayers` | complete result with `constants.StatusIncomplete` |
 
-Preserve all three input values in every successful decision.
+Preserve all three input values in every successful result.
 
 ### 3. Own one test
 
-Add `TestDecideAdmissionQueuesJobWithInsufficientWorkers` to
-`services/admission_service_test.go`. Use fewer available workers than required and assert
-the complete returned model and a nil error.
+Add `TestDecideReadinessMarksSquadIncompleteWithInsufficientPlayers` to
+`services/squad_readiness_service_test.go`. Use fewer available players than required and
+assert the complete returned model and a nil error.
 
 ## Scope preflight
 
@@ -66,12 +68,12 @@ the complete returned model and a nil error.
   decisions that produce those models.
 - **New operations:** none.
 - **Raised dimension:** reconstruct two connected familiar packages after a long break.
-- **Test ownership:** **starter plus one learner-authored queued-decision test**.
+- **Test ownership:** **starter tests plus one learner-authored insufficient-player test**.
 - **Deferred:** handlers, Gin, persistence, middleware, interfaces, table-driven tests,
   goroutines, and channels.
 
-Decision: **pass**. This rebuilds layer ownership without restarting basic Go or adding a
-new boundary.
+Decision: **pass**. The soccer setting changes the business problem without changing the
+technical difficulty or capability target.
 
 ## Start and verification
 
@@ -79,13 +81,13 @@ Start with the model because the service return type depends on it. Then add the
 guard before deciding between the two successful statuses.
 
 ```sh
-go test ./exercises/go/03-model-service-handler-reinforcement/031-build-job-admission-model-service/... -v
+go test ./exercises/go/03-model-service-handler-reinforcement/031-build-squad-readiness-model-service/... -v
 ```
 
 Before review:
 
 ```sh
-gofmt -w exercises/go/03-model-service-handler-reinforcement/031-build-job-admission-model-service
+gofmt -w exercises/go/03-model-service-handler-reinforcement/031-build-squad-readiness-model-service
 npm run check:go
 ```
 
@@ -94,17 +96,18 @@ npm run check:go
 Use now, in this order:
 
 1. [A Tour of Go: structs](https://go.dev/tour/moretypes/2) — defining
-   `AdmissionDecision`.
+   `SquadReadiness`.
 2. [A Tour of Go: struct literals](https://go.dev/tour/moretypes/5) — constructing the
-   returned decision with named fields.
+   returned result with named fields.
 3. [Organizing a Go module](https://go.dev/doc/modules/layout) — folders as packages and
    importing one package from another. The names `models` and `services` are our project
    convention, not special Go keywords.
 4. [A Tour of Go: methods](https://go.dev/tour/methods/1) — the service method and its
    receiver.
 5. [Go: return and handle errors](https://go.dev/doc/tutorial/handle-errors) — returning
-   the named validation error.
-6. [Go `testing`](https://pkg.go.dev/testing) — reference for your queued-decision test.
+   the supplied validation error.
+6. [Go `testing`](https://pkg.go.dev/testing) — reference for your insufficient-player
+   test.
 
 Gin is intentionally not used in GO-031. Its official
 [routing](https://gin-gonic.com/en/docs/routing/) and
@@ -117,8 +120,8 @@ The contract above is the primary guidance.
 
 - The model contains exactly the documented business fields.
 - Invalid requirements return the named error and an empty model.
-- Exact capacity is admitted.
-- Insufficient capacity is queued by your test.
+- Exact availability produces a ready result.
+- Insufficient availability produces an incomplete result covered by your test.
 - Focused and repository-wide checks pass.
 
 Ask for a review when finished and disclose any documentation or AI help used. No written
