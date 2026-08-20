@@ -22,16 +22,33 @@ export function PlayerReviewSheet({
   onOpenChange,
   onClearPlayer,
 }: PlayerReviewSheetProps) {
-  void player;
-  void open;
-  void onOpenChange;
-  void onClearPlayer;
-  void Button;
-  void SheetContent;
-  void SheetDescription;
-  void SheetFooter;
-  void SheetHeader;
-  void SheetTitle;
+  if (player === null) {
+    return null;
+  }
 
-  return <Sheet />;
+  return (
+    <Sheet open={open} onOpenChange={(nextOpen) => onOpenChange(nextOpen)}>
+      <SheetContent side="right">
+        <SheetHeader>
+          <SheetTitle>Review {player.displayName}</SheetTitle>
+          <SheetDescription>
+            Confirm the final medical decision for this player.
+          </SheetDescription>
+        </SheetHeader>
+        <dl className="player-review-details">
+          <dt>Shirt</dt>
+          <dd>{player.shirtNumber}</dd>
+          <dt>Position</dt>
+          <dd>{player.position}</dd>
+          <dt>Medical note</dt>
+          <dd>{player.medicalNote}</dd>
+        </dl>
+        <SheetFooter>
+          <Button type="button" onClick={onClearPlayer}>
+            Clear to play
+          </Button>
+        </SheetFooter>
+      </SheetContent>
+    </Sheet>
+  );
 }

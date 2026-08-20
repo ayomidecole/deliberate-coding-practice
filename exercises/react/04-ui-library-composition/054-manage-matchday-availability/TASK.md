@@ -182,6 +182,24 @@ npx vitest run exercises/react/04-ui-library-composition/054-manage-matchday-ava
 Work in the order below. Each component receives prepared values and reports intent; none
 owns the medical-review workflow.
 
+### Browser component previews
+
+Once the domain checkpoint passes, start the exercise in the browser:
+
+```bash
+npx vite exercises/react/04-ui-library-composition/054-manage-matchday-availability --host 127.0.0.1
+```
+
+Use the supplied preview that matches the component you are currently building:
+
+- `http://127.0.0.1:5173/?preview=summary`
+- `http://127.0.0.1:5173/?preview=table`
+- `http://127.0.0.1:5173/?preview=sheet`
+
+The preview passes fixed domain values into one component so its UI appears as you author
+it. Its callbacks intentionally do not change workflow state. Do not edit `src/app/app.tsx`;
+the ordinary URL still mounts your real feature for Boundary 4 and final verification.
+
 ### MatchdaySquadSummary
 
 Build a semantic header using the supplied `fixture-summary` styles:
