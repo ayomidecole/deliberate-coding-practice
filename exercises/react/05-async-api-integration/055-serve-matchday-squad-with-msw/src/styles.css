@@ -1,0 +1,175 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+@import "@fontsource-variable/jetbrains-mono";
+@import "@fontsource-variable/oxanium";
+
+:root {
+  color: oklch(0.18 0.02 150);
+  background: oklch(0.975 0.01 145);
+  font-family: "JetBrains Mono Variable", monospace;
+  font-synthesis: none;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  min-width: 320px;
+  min-height: 100vh;
+  margin: 0;
+  background:
+    linear-gradient(135deg, oklch(0.96 0.03 145), transparent 48%),
+    oklch(0.985 0.006 140);
+}
+
+button {
+  padding: 11px 16px;
+  color: white;
+  background: oklch(0.46 0.17 28);
+  border: 1px solid oklch(0.4 0.17 28);
+  border-radius: 8px;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+button:disabled {
+  cursor: wait;
+  opacity: 0.55;
+}
+
+.secondary-action {
+  color: oklch(0.22 0.03 150);
+  background: white;
+  border-color: oklch(0.78 0.03 150);
+}
+
+.app-shell {
+  width: min(92vw, 980px);
+  margin: 0 auto;
+  padding: 64px 0;
+}
+
+.page-header {
+  max-width: 760px;
+  margin-bottom: 32px;
+}
+
+.page-header h1,
+.api-panel h2,
+.squad-response h3 {
+  font-family: "Oxanium Variable", sans-serif;
+}
+
+.page-header h1 {
+  margin: 6px 0 12px;
+  font-size: clamp(2.2rem, 7vw, 4.5rem);
+  line-height: 0.98;
+}
+
+.page-header > p:last-child {
+  max-width: 680px;
+  color: oklch(0.42 0.02 150);
+  line-height: 1.65;
+}
+
+.eyebrow,
+.response-label {
+  margin: 0;
+  color: oklch(0.46 0.17 28);
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+}
+
+.api-panel {
+  overflow: hidden;
+  background: white;
+  border: 1px solid oklch(0.84 0.025 150);
+  border-radius: 14px;
+  box-shadow: 0 20px 60px rgb(17 45 32 / 10%);
+}
+
+.api-panel-copy,
+.request-actions,
+.response-panel {
+  padding: 24px;
+}
+
+.api-panel-copy {
+  color: white;
+  background: oklch(0.25 0.055 152);
+  border-bottom: 5px solid oklch(0.52 0.2 28);
+}
+
+.api-panel-copy .eyebrow {
+  color: oklch(0.78 0.14 60);
+}
+
+.api-panel-copy h2 {
+  margin: 8px 0 14px;
+  font-size: clamp(1.45rem, 3vw, 2.2rem);
+}
+
+.endpoint {
+  display: inline-block;
+  margin: 0;
+  padding: 8px 10px;
+  color: oklch(0.88 0.025 150);
+  background: rgb(0 0 0 / 18%);
+  border-radius: 6px;
+}
+
+.request-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  border-bottom: 1px solid oklch(0.9 0.015 150);
+}
+
+.response-panel {
+  min-height: 152px;
+  background: oklch(0.975 0.01 150);
+}
+
+.response-panel > p:not(.response-label) {
+  margin: 20px 0 0;
+  color: oklch(0.42 0.02 150);
+}
+
+.squad-response {
+  display: flex;
+  gap: 24px;
+  align-items: end;
+  justify-content: space-between;
+  margin-top: 18px;
+}
+
+.squad-response h3,
+.squad-response p {
+  margin: 0;
+}
+
+.squad-response h3 {
+  margin: 4px 0;
+  font-size: 1.5rem;
+}
+
+.response-code {
+  color: oklch(0.48 0.15 145);
+  font-weight: 800;
+}
+
+@media (max-width: 620px) {
+  .app-shell {
+    padding: 36px 0;
+  }
+
+  .squad-response {
+    align-items: start;
+    flex-direction: column;
+  }
+}
