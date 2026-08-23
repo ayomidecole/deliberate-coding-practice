@@ -20,18 +20,25 @@ the service decides whether a fixture is valid and produces the shared model.
 
 ### 1. Define the model
 
-In `models/fixture.go`, define `Fixture` with these fields:
+An eventual successful API response would contain this data:
 
-```go
-ID            string
-CompetitionID string
-HomeTeamID    string
-AwayTeamID    string
-Venue         string
-Status        string
+```json
+{
+  "id": "fixture-501",
+  "competitionId": "competition-liga",
+  "homeTeamId": "team-riverside",
+  "awayTeamId": "team-united",
+  "venue": "Riverside Ground",
+  "status": "scheduled"
+}
 ```
 
-The model owns the shared fixture shape. It contains no validation or HTTP code.
+In `models/fixture.go`, define a `Fixture` struct that can represent all of that
+information. Translate the JSON property names into idiomatic exported Go field names and
+choose the field types from the example.
+
+The model owns the shared internal fixture shape. It contains no validation, HTTP code, or
+JSON tags—the future handler DTO will own the wire format.
 
 ### 2. Implement the service
 
@@ -67,13 +74,14 @@ The same-team test is supplied. Add these tests to `services/fixture_service_tes
 
 ## Scope preflight
 
-- **Demonstrated:** structs, constants, constructors, sentinel errors, validation branches,
-  complete model returns, and ordinary unit tests.
+- **Demonstrated:** translating JSON-shaped data into Go fields, structs, constants,
+  constructors, sentinel errors, validation branches, complete model returns, and ordinary
+  unit tests.
 - **Retrieved capability:** models own shared data shapes; services own business rules and
   return models.
 - **New operations:** none.
-- **Raised dimension:** changed-context construction with increased ownership of familiar
-  tests.
+- **Raised dimension:** changed-context construction, including one model-design
+  translation, with increased ownership of familiar tests.
 - **Deferred:** Gin, handlers, request/response DTOs, persistence, interfaces, middleware,
   table-driven tests, goroutines, and channels.
 
@@ -114,7 +122,7 @@ npm run check:go
 
 ## Completion criteria
 
-- `Fixture` contains exactly the documented fields.
+- `Fixture` represents every property in the supplied JSON using idiomatic exported fields.
 - Both invalid states return the correct named error and an empty fixture.
 - Valid input returns a complete scheduled fixture.
 - You authored both requested tests.

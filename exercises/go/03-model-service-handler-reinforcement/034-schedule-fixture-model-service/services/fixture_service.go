@@ -3,6 +3,7 @@ package services
 import (
 	"errors"
 
+	"example.com/deliberate-coding-practice/exercises/go/03-model-service-handler-reinforcement/034-schedule-fixture-model-service/constants"
 	"example.com/deliberate-coding-practice/exercises/go/03-model-service-handler-reinforcement/034-schedule-fixture-model-service/models"
 )
 
@@ -24,5 +25,21 @@ func (service *FixtureService) ScheduleFixture(
 	awayTeamID string,
 	venue string,
 ) (models.Fixture, error) {
-	return models.Fixture{}, nil
+
+	if homeTeamID == awayTeamID {
+		return models.Fixture{}, ErrSameTeam
+	}
+
+	if venue == "" {
+		return models.Fixture{}, ErrVenueRequired
+	}
+
+	return models.Fixture{
+		ID:            fixtureID,
+		CompetitionID: competitionID,
+		HomeTeamID:    homeTeamID,
+		AwayTeamID:    awayTeamID,
+		Venue:         venue,
+		Status:        constants.FixtureStatusScheduled,
+	}, nil
 }
