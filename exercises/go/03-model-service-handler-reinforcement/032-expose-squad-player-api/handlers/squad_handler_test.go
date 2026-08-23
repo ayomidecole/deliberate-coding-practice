@@ -74,6 +74,22 @@ func TestAddPlayerReturnsCreatedPlayer(t *testing.T) {
 	}
 }
 
+func TestAddPlayerRejectsUnsupportedPosition(t *testing.T) {
+	router := newTestRouter()
+
+	response := performAddPlayerRequest(router, "team-riverside", `{
+		"playerId": "player-202",
+		"name": "Sofia Martins",
+		"position": "halfback",
+		"squadNumber": 8
+	}`)
+
+	if got, want := response.Code, http.StatusUnprocessableEntity; got != want {
+		t.Fatalf("status = %d; want %d", got, want)
+	}
+	assertErrorResponse(t, response, "invalid position")
+}
+
 func newTestRouter() *gin.Engine {
 	service := services.NewSquadService()
 	handler := NewSquadHandler(service)

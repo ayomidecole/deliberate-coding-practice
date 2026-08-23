@@ -1,6 +1,7 @@
 package handlers
 
 import (
+	"errors"
 	"net/http"
 
 	"example.com/deliberate-coding-practice/exercises/go/03-model-service-handler-reinforcement/032-expose-squad-player-api/services"
@@ -35,5 +36,36 @@ func NewSquadHandler(service *services.SquadService) *SquadHandler {
 }
 
 func (handler *SquadHandler) AddPlayer(c *gin.Context) {
-	c.JSON(http.StatusNotImplemented, errorResponseJSON{Error: "not implemented"})
+	var body addPlayerRequestJSON
+
+	if err := c.ShouldBindJSON(&body); err != nil {
+		c.JSON(http.StatusBadRequest, errorResponseJSON{Error: "invalid request"})
+		return
+	}
+
+	player, err := handler.service.AddPlayer(
+		c.Param("teamID"),
+		body.PlayerID,
+		body.Name,
+		body.Position,
+		body.SquadNumber,
+	)
+
+	if errors.Is(err, services.ErrInvalidSquadNumber) {
+		c.JSON(http.StatusUnprocessableEntity, errorResponseJSON{Error: "invalid squad number"})
+		return
+	}
+
+	if errors.Is(err, services.ErrInvalidPosition) {
+		c.JSON(http.StatusUnprocessableEntity, errorResponseJSON{Error: "invalid position"})
+		return
+	}
+
+	c.JSON(http.StatusCreated, squadPlayerResponseJSON{
+		TeamID:      player.TeamID,
+		PlayerID:    player.PlayerID,
+		Name:        player.Name,
+		Position:    player.Position,
+		SquadNumber: player.SquadNumber,
+	})
 }
