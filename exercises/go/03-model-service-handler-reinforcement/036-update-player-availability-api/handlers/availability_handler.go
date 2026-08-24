@@ -38,7 +38,7 @@ func (handler *AvailabilityHandler) UpdateAvailability(c *gin.Context) {
 		return
 	}
 
-	availabilty, err := handler.service.SetAvailability(
+	availabilityResult, err := handler.service.SetAvailability(
 		c.Param("teamID"),
 		c.Param("playerID"),
 		body.Availability,
@@ -52,8 +52,8 @@ func (handler *AvailabilityHandler) UpdateAvailability(c *gin.Context) {
 	}
 
 	c.JSON(http.StatusOK, playerAvailabilityResponseJSON{
-		TeamID:       availabilty.TeamID,
-		PlayerID:     availabilty.PlayerID,
-		Availability: availabilty.Availability,
+		TeamID:       availabilityResult.TeamID,
+		PlayerID:     availabilityResult.PlayerID,
+		Availability: availabilityResult.Availability,
 	})
 }
