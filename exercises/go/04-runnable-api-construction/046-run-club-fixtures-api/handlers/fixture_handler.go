@@ -34,6 +34,10 @@ func (handler *FixtureHandler) GetFixture(c *gin.Context) {
 		c.JSON(http.StatusNotFound, errorResponseJSON{Error: "fixture not found"})
 		return
 	}
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, errorResponseJSON{Error: "internal server error"})
+		return
+	}
 
 	c.JSON(http.StatusOK, newFixtureResponseJSON(fixture))
 }
