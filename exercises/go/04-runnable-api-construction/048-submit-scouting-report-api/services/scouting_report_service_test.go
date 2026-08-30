@@ -74,4 +74,21 @@ func TestCreateScoutingReportRejectsRatingBelowMinimum(t *testing.T) {
 	}
 }
 
-// Add the learner-owned rating-above-maximum test below.
+func TestCreateScoutingReportRejectsRatingAboveMaximum(t *testing.T) {
+	service := NewScoutingReportService()
+
+	got, err := service.CreateScoutingReport(
+		"club-1201",
+		"report-7201",
+		"player-3301",
+		"Strong movement between defensive lines",
+		11,
+	)
+
+	if !errors.Is(err, ErrInvalidRating) {
+		t.Fatalf("CreateScoutingReport() error = %v; want %v", err, ErrInvalidRating)
+	}
+	if got != (models.ScoutingReport{}) {
+		t.Errorf("CreateScoutingReport() = %+v; want empty report", got)
+	}
+}

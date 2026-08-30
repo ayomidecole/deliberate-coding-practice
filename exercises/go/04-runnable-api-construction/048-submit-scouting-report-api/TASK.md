@@ -209,8 +209,48 @@ Send the documented request to:
 POST http://localhost:8080/clubs/club-1201/scouting-reports
 ```
 
-Also try malformed JSON, an empty summary, and rating `11`. Confirm `201`, `400`, `422`,
-and `422`, then stop the server with `Ctrl+C`.
+Set `Content-Type` to `application/json` and use these copy-ready request bodies.
+
+Success (`201 Created`):
+
+```json
+{
+  "reportId": "report-7201",
+  "playerId": "player-3301",
+  "summary": "Strong movement between defensive lines",
+  "rating": 8
+}
+```
+
+Malformed JSON (`400 Bad Request`):
+
+```json
+{
+```
+
+Missing summary (`422 Unprocessable Entity`):
+
+```json
+{
+  "reportId": "report-7202",
+  "playerId": "player-3302",
+  "summary": "",
+  "rating": 8
+}
+```
+
+Rating above the maximum (`422 Unprocessable Entity`):
+
+```json
+{
+  "reportId": "report-7203",
+  "playerId": "player-3303",
+  "summary": "Excellent recovery pace",
+  "rating": 11
+}
+```
+
+After confirming all four outcomes, stop the server with `Ctrl+C`.
 
 ## Completion criteria
 
