@@ -155,7 +155,6 @@ The request/response DTOs are supplied in `handlers/club_profile_handler.go` so 
 contract and implementation stay visible together.
 
 Define `ClubProfileHandler`, its constructor, and:
-
 ```go
 func (handler *ClubProfileHandler) GetProfile(c *gin.Context)
 func (handler *ClubProfileHandler) ReplaceProfile(c *gin.Context)

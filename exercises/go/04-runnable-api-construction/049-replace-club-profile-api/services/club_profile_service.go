@@ -4,8 +4,8 @@ import (
 	"example.com/deliberate-coding-practice/exercises/go/04-runnable-api-construction/049-replace-club-profile-api/models"
 )
 
-type ClubProfileService struct{
-	profiles [] models.ClubProfile
+type ClubProfileService struct {
+	profiles []models.ClubProfile
 }
 
 func NewClubProfileService(profiles []models.ClubProfile) *ClubProfileService {
@@ -13,9 +13,9 @@ func NewClubProfileService(profiles []models.ClubProfile) *ClubProfileService {
 }
 
 func (service *ClubProfileService) FindProfile(
-    clubID string,
+	clubID string,
 ) (models.ClubProfile, error) {
-	for _, profile := range service.profiles{
+	for _, profile := range service.profiles {
 		if profile.ClubID == clubID {
 			return profile, nil
 		}
@@ -24,26 +24,26 @@ func (service *ClubProfileService) FindProfile(
 }
 
 func (service *ClubProfileService) ReplaceProfile(
-    clubID string,
-    name string,
-    city string,
-    stadium string,
-    foundedYear int,
+	clubID string,
+	name string,
+	city string,
+	stadium string,
+	foundedYear int,
 ) (models.ClubProfile, error) {
-	for index, profile := range service.profiles{
-		if clubID != profile.ClubID{
+	for index, profile := range service.profiles {
+		if clubID != profile.ClubID {
 			continue
 		}
 
-		if name == ""{
+		if name == "" {
 			return models.ClubProfile{}, ErrInvalidClubName
 		}
 
 		replacement := models.ClubProfile{
-			ClubID: clubID,
-			Name: name,
-			City: city,
-			Stadium: stadium,
+			ClubID:      clubID,
+			Name:        name,
+			City:        city,
+			Stadium:     stadium,
 			FoundedYear: foundedYear,
 		}
 
