@@ -2,18 +2,25 @@
 
 An adaptive deliberate-practice workspace for becoming a stronger software engineer with TypeScript, Go, and React.
 
-Each exercise combines implementation and testing. An AI tutor reviews the result, checks understanding, and chooses the next task based on the evidence rather than following a fixed difficulty ladder.
+Tasks develop implementation, design, testing, and debugging through focused changes to
+working systems. An AI tutor scopes and reviews the work using evidence of increasing
+independence.
 
 ## Working agreement
 
-- Work on one active exercise at a time.
-- Write the important implementation code yourself.
-- Every coding exercise includes both implementation and test work.
-- Official documentation is allowed and normally provided in `TASK.md`.
-- Do not use another AI to generate an exercise solution.
-- Ask the tutor for hints when needed. Hints progress from questions and conceptual nudges to more concrete help.
-- Run the acceptance commands before requesting a review.
-- During review, be ready to explain the code or make a small change.
+- Keep one active task per track.
+- Each task states its problem, contract, learning target, ownership, guidance, and checks.
+- Write the central learning target; reuse familiar code and use AI for declared supporting
+  work. Ask for hints or completion help when needed; assistance informs later practice.
+- Own scoped decisions, review generated code, and run/debug acceptance checks. Test
+  authorship varies with the learning target and unfamiliar infrastructure is supplied.
+- Use focused official documentation in `TASK.md`. No mandatory written reflections or quizzes.
+
+The TypeScript track is moving to an evolving Hono API design project. Its learning goals
+and curriculum will be defined before assignment, beginning with a focused Hono introduction.
+The first roughly 3–5 meaningful changes will pilot this task format and assistance balance.
+Existing Go and React assignments stay in place. See [AGENTS.md](AGENTS.md) for scope gates;
+the local `.build-by-learning-state.md` records current evidence and next actions.
 
 ## Curriculum arcs
 
@@ -21,16 +28,15 @@ Every language track is divided into **arcs**: coherent phases that group relate
 capabilities and show what larger engineering outcome the exercises are building toward.
 An arc is not a timebox, a fixed number of tasks, or merely a folder for one syntax topic.
 
-Every arc uses the same mastery progression:
+Capabilities generally progress through:
 
 ```text
 introduce → guided practice → retrieval → transfer → integration → independent rebuild
 ```
 
-The tutor introduces and scaffolds unfamiliar boundaries, then reduces help as evidence
-improves. Assisted completion schedules another retrieval task. An arc ends only after the
-learner can implement, test, debug, and transfer its capabilities in a changed context;
-finishing an arbitrary task count is not enough.
+The tutor scaffolds unfamiliar boundaries, then reduces help as evidence improves.
+Assisted completion schedules focused retrieval. Closing an arc does not establish mastery
+of unfinished or assisted work; carry those evidence gaps forward explicitly.
 
 Arc roadmaps are provisional. Before entering the next arc, review the learner's evidence,
 current goals, likely first edits, and likely stuck points. Rescope or reorder the roadmap
@@ -55,8 +61,9 @@ exercises/
 projects/
 ```
 
-React already uses the arc layout. Go and TypeScript will adopt it after their respective
-learning chats review the existing evidence and define appropriate arc boundaries.
+Go and React use the arc layout. Existing TypeScript exercises remain in place while the
+Hono project's structure is decided. Evolving projects need not be copied into a new folder
+for every task.
 
 Small exercises stay flat inside their task folder. Larger assignments can introduce their own `src` layout when that structure becomes useful.
 

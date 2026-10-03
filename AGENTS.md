@@ -1,5 +1,33 @@
 # Learning Workspace Instructions
 
+## Learning philosophy and ownership
+
+Apply these principles across TypeScript, Go, and React. The learner owns the reasoning
+and implementation central to the learning target; they need not type every line.
+Reuse established code and evolve working projects. Use isolated exercises or independent
+rebuilds when evidence calls for transfer practice.
+
+- Define tasks through the problem, observable contract, learning target, learner/AI
+  ownership, focused guidance, and verification. Specify behavior precisely; leave
+  implementation choices the learner is equipped to make. Explain unfamiliar operations
+  without prescribing every step of a familiar algorithm.
+- AI may supply setup, supporting code, and familiar repetition within the declared scope.
+  Keep the target implementation learner-authored unless they request help completing it.
+  The learner owns scoped decisions, meaningful test cases, review of generated code,
+  execution, and diagnosis; scaffold these responsibilities when unfamiliar.
+- Vary implementation, extension, and bounded review/debugging tasks. Reviewing generated
+  solutions alone is insufficient evidence for a capability never implemented by the learner.
+- Record assisted completion separately from independent capability. Retrieve the central
+  concept later through a small changed problem. Judge progress by implementation, change,
+  testing, and diagnosis; require no post-task written reflection or quiz.
+- Pilot the task format and assistance balance in an evolving TypeScript/Hono API for
+  roughly 3–5 meaningful changes. Evaluate ability to start, make decisions, modify prior
+  work with less help, select tests, and diagnose failures, alongside learner experience.
+  This is a methodology review window, not a mastery deadline. Go/React adopt the principles
+  now; retain current assignments and defer broader redesign until pilot evidence exists.
+
+## Exercise scope gates
+
 For any work that creates, changes, reviews, or advances an exercise:
 
 1. Use the `build-by-learning` skill and read `.build-by-learning-state.md` first.
