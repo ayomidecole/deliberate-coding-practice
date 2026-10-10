@@ -6,10 +6,15 @@ export const matchdaySquadHandlers = [
   http.get<{ fixtureId: string }>(
     '*/api/matchday-squads/:fixtureId',
     ({ params }) => {
-      void params.fixtureId;
-      void MATCHDAY_SQUADS;
+      const squad = MATCHDAY_SQUADS.find(
+        (candidate) => candidate.fixture_id === params.fixtureId,
+      );
 
-      return new HttpResponse(null, { status: 501 });
+      if (squad === undefined) {
+        return new HttpResponse(null, { status: 404 });
+      }
+
+      return HttpResponse.json(squad);
     },
   ),
 ];

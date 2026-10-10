@@ -1,4 +1,4 @@
-import type { MatchdaySquadApiRecord } from '../../../types/matchday-squad-api';
+import type { MatchdaySquadApiRecord } from '../../types/matchday-squad-api';
 
 export const MATCHDAY_SQUADS = [
   {
