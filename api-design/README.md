@@ -6,10 +6,10 @@ skills where needed before combining them; Go experience does not establish Hono
 
 ## Start
 
-API-001 through [API-007](01-hono-foundations/007-run-fixture-api/TASK.md) are complete.
-API-007 verified learner app wiring over live HTTP with a supplied server launcher.
-[API-008](01-hono-foundations/008-build-home-fixtures-api/TASK.md) combines learner-written
-service, handler, and app wiring with a supplied launcher and tests.
+API-001 through [API-008](01-hono-foundations/008-build-home-fixtures-api/TASK.md) are complete.
+API-008 passed five tests, typecheck, and live HTTP checks with guidance on filtering,
+response construction, and exports. [API-009](01-hono-foundations/009-diagnose-away-fixtures/TASK.md)
+retrieves callback returns through a single service repair and one learner test case.
 Dependencies and checks are isolated from the other tracks. Node 22+ is required.
 
 ## Layout and ownership

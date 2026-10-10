@@ -4,6 +4,9 @@ export function listHomeFixtures(
   fixtures: readonly Fixture[],
   clubId: string,
 ): Fixture[] {
-  // Return the fixtures that satisfy the home-only rule in TASK.md.
-  throw new Error('Not implemented');
+  const homeFixtures = fixtures.filter((fixture) => {
+    return fixture.homeClubId === clubId
+  })
+  
+  return homeFixtures
 }
