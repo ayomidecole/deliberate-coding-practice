@@ -75,6 +75,6 @@ Each task will select the relevant section, not assign this whole reading list.
 - Request tests: [Hono testing](https://hono.dev/docs/guides/testing).
 - Startup: [Hono on Node.js](https://hono.dev/docs/getting-started/nodejs).
 
-API-001 through [API-003](003-list-club-fixtures/TASK.md) are complete.
-[API-004](004-respond-with-club-fixtures/TASK.md) is active: translate the existing
-service result into a Hono JSON response with supplied test routing.
+API-001 through [API-005](005-return-fixture-overview/TASK.md) are complete.
+[API-006](006-compose-fixture-app/TASK.md) composes the two working handlers on
+one app; the learner owns route registration, while the request tests are supplied.

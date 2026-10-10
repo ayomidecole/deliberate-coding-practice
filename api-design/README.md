@@ -6,9 +6,9 @@ skills where needed before combining them; Go experience does not establish Hono
 
 ## Start
 
-API-001 through [API-003](01-hono-foundations/003-list-club-fixtures/TASK.md) are complete.
-[API-004](01-hono-foundations/004-respond-with-club-fixtures/TASK.md) practices the first
-Hono handler. Shared tooling stays isolated.
+API-001 through [API-004](01-hono-foundations/004-respond-with-club-fixtures/TASK.md) are complete.
+[API-005](01-hono-foundations/005-return-fixture-overview/TASK.md) retrieves the Hono
+handler response with a changed contract. Shared tooling stays isolated.
 Dependencies and checks are isolated from the other tracks. Node 22+ is required.
 
 ## Layout and ownership
