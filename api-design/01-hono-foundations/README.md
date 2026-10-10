@@ -82,7 +82,9 @@ Each task will select the relevant section, not assign this whole reading list.
 - Request tests: [Hono testing](https://hono.dev/docs/guides/testing).
 - Startup: [Hono on Node.js](https://hono.dev/docs/getting-started/nodejs).
 
-API-001 through [API-006](006-compose-fixture-app/TASK.md) are complete.
-API-006 passed typecheck and three request tests after export/route feedback.
-[API-007](007-run-fixture-api/TASK.md) combines app wiring and server startup using
-local copies of completed feature code.
+API-001 through [API-007](007-run-fixture-api/TASK.md) are complete.
+API-007 passed typecheck, two app tests, and live HTTP checks. The learner wired
+the app and verified it in Hoppscotch; the tutor supplied the server launcher.
+[API-008](008-build-home-fixtures-api/TASK.md) retrieves service selection, JSON
+response construction, and app wiring together through a home-fixtures endpoint.
+Model/domain, tests, and launcher are supplied; no new framework operation is added.
