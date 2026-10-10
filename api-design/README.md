@@ -6,8 +6,9 @@ skills where needed before combining them; Go experience does not establish Hono
 
 ## Start
 
-API-001 and [API-002](01-hono-foundations/002-protect-fixture-domain/TASK.md) are complete.
-The next exercise will practice one service operation. Shared tooling stays isolated.
+API-001 through [API-003](01-hono-foundations/003-list-club-fixtures/TASK.md) are complete.
+[API-004](01-hono-foundations/004-respond-with-club-fixtures/TASK.md) practices the first
+Hono handler. Shared tooling stays isolated.
 Dependencies and checks are isolated from the other tracks. Node 22+ is required.
 
 ## Layout and ownership

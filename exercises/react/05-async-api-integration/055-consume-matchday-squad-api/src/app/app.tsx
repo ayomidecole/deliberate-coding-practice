@@ -7,8 +7,7 @@ export function App() {
         <p className="eyebrow">Riverside Athletic · API operations</p>
         <h1>Matchday squad API lab</h1>
         <p>
-          The React feature sends a real fetch request. Your MSW handler decides
-          which HTTP response comes back.
+          Load the matchday squad or check how the app handles a missing fixture.
         </p>
       </header>
 

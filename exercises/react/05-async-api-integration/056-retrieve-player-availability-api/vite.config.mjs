@@ -4,12 +4,12 @@ import react, { reactCompilerPreset } from '@vitejs/plugin-react';
 import { getResponse, HttpResponse } from 'msw';
 import { defineConfig } from 'vite';
 
-import { handlers } from './src/mocks/handlers/index.ts';
+import { handlers } from './src/mocks/handlers/player-availability-handlers.ts';
 
 export default defineConfig({
   plugins: [
     {
-      name: 'matchday-mock-api',
+      name: 'player-availability-mock-api',
       apply: 'serve',
       configureServer(server) {
         server.middlewares.use(async (req, res, next) => {

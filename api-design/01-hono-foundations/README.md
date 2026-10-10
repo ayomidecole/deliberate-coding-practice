@@ -75,6 +75,6 @@ Each task will select the relevant section, not assign this whole reading list.
 - Request tests: [Hono testing](https://hono.dev/docs/guides/testing).
 - Startup: [Hono on Node.js](https://hono.dev/docs/getting-started/nodejs).
 
-API-001 and [API-002](002-protect-fixture-domain/TASK.md) are complete. API-002 retrieved
-class construction with API-001 as a reference. The next task can introduce one service
-operation using a supplied domain value.
+API-001 through [API-003](003-list-club-fixtures/TASK.md) are complete.
+[API-004](004-respond-with-club-fixtures/TASK.md) is active: translate the existing
+service result into a Hono JSON response with supplied test routing.

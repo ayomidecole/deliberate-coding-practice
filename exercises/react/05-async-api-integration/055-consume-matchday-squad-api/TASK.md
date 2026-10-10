@@ -39,7 +39,7 @@ your work starts when `fetch` receives its response.
 | Interpret a browser `fetch` response | First owned API-client boundary | **New and guided** |
 | Run supplied tests and inspect browser behavior | Repeated across prior arcs | Demonstrated |
 
-Only the API-client protocol is new. MSW handlers, worker registration, seed data, React
+Only the API-client protocol is new. MSW handlers, local server wiring, seed data, React
 request state, presentation, and all tests are supplied.
 
 ## The system you are building
@@ -65,6 +65,10 @@ React feature → supplied component → browser
 MSW only replaces the remote server during development and tests. The API client remains
 frontend production code; when the real API exists, this request can cross the network
 without moving server implementation into React.
+
+Vite serves the supplied MSW handlers directly over HTTP during development; no browser
+service worker is required. This is tutor-owned infrastructure, not another learning target.
+The production build expects a real backend; use the development command below to practice.
 
 ## The `fetch` mental model
 
@@ -142,10 +146,11 @@ Run the supplied API-client tests:
 npx vitest run exercises/react/05-async-api-integration/055-consume-matchday-squad-api/src/api/get-matchday-squad.test.ts
 ```
 
-Then confirm the supplied mock endpoint still passes its own tests:
+Then run all exercise checks, including the supplied handler tests and direct-HTTP
+regression tests that verify the development server returns API responses, not HTML:
 
 ```bash
-npx vitest run exercises/react/05-async-api-integration/055-consume-matchday-squad-api/src/mocks/handlers/matchday-squad-handlers.test.ts
+npx vitest run exercises/react/05-async-api-integration/055-consume-matchday-squad-api
 ```
 
 Type-check and build the exercise:
@@ -171,7 +176,7 @@ At `http://127.0.0.1:5173/`:
 - The client maps 404 to the explicit `not-found` result.
 - It throws the required error for other unsuccessful statuses.
 - It converts successful JSON from `unknown` into a validated `MatchdaySquad`.
-- Both focused test files, the exercise type-check, and the Vite build pass.
+- All exercise tests, the exercise type-check, and the Vite build pass.
 - The browser demonstrates both the successful and not-found paths.
 
 Do not write tests in this exercise. The first API-consumer test harness is supplied so

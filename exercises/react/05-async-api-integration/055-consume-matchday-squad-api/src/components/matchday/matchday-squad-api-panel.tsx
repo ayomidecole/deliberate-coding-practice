@@ -46,7 +46,7 @@ export function MatchdaySquadApiPanel({
       <div className="response-panel" aria-live="polite">
         <p className="response-label">Response</p>
         {requestStatus === 'idle' && (
-          <p>Choose a request to exercise your handler.</p>
+          <p>Choose a fixture to load its squad.</p>
         )}
         {requestStatus === 'loading' && <p>Request in flight…</p>}
         {requestStatus === 'not-found' && (
