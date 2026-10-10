@@ -16,7 +16,16 @@ export function RetrievePlayerAvailabilityFeature() {
 
   const loadAvailability = async (playerId: string) => {
     try {
-      void playerId;
+      setRequestState({ status: 'loading' });
+      const availability = await getPlayerAvailability(playerId)
+
+      if (!availability) {
+        setRequestState({ status: 'not-found' });
+        return
+      } else {
+        setRequestState({ status: 'success', record: availability })
+      }
+
     } catch (error: unknown) {
       setRequestState({
         status: 'error',

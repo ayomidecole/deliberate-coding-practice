@@ -6,9 +6,9 @@ skills where needed before combining them; Go experience does not establish Hono
 
 ## Start
 
-API-001 through [API-004](01-hono-foundations/004-respond-with-club-fixtures/TASK.md) are complete.
-[API-005](01-hono-foundations/005-return-fixture-overview/TASK.md) retrieves the Hono
-handler response with a changed contract. Shared tooling stays isolated.
+API-001 through [API-006](01-hono-foundations/006-compose-fixture-app/TASK.md) are complete.
+App wiring now passes. [API-007](01-hono-foundations/007-run-fixture-api/TASK.md)
+combines route wiring and local server startup in a self-contained API.
 Dependencies and checks are isolated from the other tracks. Node 22+ is required.
 
 ## Layout and ownership
@@ -16,10 +16,13 @@ Dependencies and checks are isolated from the other tracks. Node 22+ is required
 Use `<numbered-arc>/<numbered-exercise>/` beneath this folder. Create arc folders when
 work begins. Use focused exercises for individual capabilities, then combine working
 pieces in integration tasks. Reuse or rebuild code according to the learning target.
+Keep each API's implementation inside its exercise folder; copy completed code when
+needed rather than importing another exercise. Shared tooling stays at this root.
 
 Start with [Arc 01: Building blocks of a Hono API](01-hono-foundations/README.md).
-Models → domain → services → handlers → app wiring → startup → integration, in separately
-scoped exercises. Start with model construction; use evidence to pace domain retrieval.
+Models → domain → services → handlers → app wiring → startup → combined API practice →
+basic persistence and local PostgreSQL. Introduce boundaries separately, then practice
+them together in complete features with fading guidance.
 
 Use `src/models/` for record types, `src/domain/` for business objects/invariants,
 `src/services/` for application operations, `src/handlers/` for HTTP translation with
@@ -30,7 +33,8 @@ Colocate tests: `models/club.typecheck.ts`, `domain/club.test.ts`,
 their corresponding source. Add layers when the task practices their responsibility;
 an individual-part exercise does not need all these folders.
 
-The learner writes the implementation; the tutor explains, supplies focused docs, and
+The learner writes feature/app implementation; routine server launchers are supplied.
+The tutor explains, supplies focused docs, and
 reviews code. Supply tooling and unfamiliar test harnesses, vary later test ownership,
 and provide worked examples when requested. The eleven-arc design curriculum remains.
 
@@ -43,7 +47,9 @@ consequences of design choices. No mandatory design essays or post-task quizzes.
 1. **Building blocks and runnable Hono APIs.** Follow the introductory arc linked above.
    Practice individual layers, wire a first endpoint, then extend and independently set up
    small changed APIs with fading guidance. Move to resource-design choices only after
-   running, testing, changing, and diagnosing an API are comfortable. Broader request
+   running, testing, changing, and diagnosing an API are comfortable. Add a persistence
+   component and basic local PostgreSQL wiring through separate checkpoints; prove a
+   write survives restarting the API, then repeat in a changed feature. Broader request
    inputs and middleware enter when needed, not as prerequisites to the first runnable API.
 2. **Resource modeling and boundaries.** Consumer workflows, identity, relationships,
    ownership, collections, nesting, embedding/references, business actions, and public
@@ -54,7 +60,7 @@ consequences of design choices. No mandatory design essays or post-task quizzes.
    consumer. Study public variants separately from interchangeable internal behavior.
 4. **HTTP semantics, errors, and state.** Safe/idempotent operations, create/replace/patch/
    delete, IDs, statuses/headers, consistent errors, state transitions, and failure atomicity.
-   Introduce local PostgreSQL near the end in a separate scoped task.
+   Build on the stored workflows introduced in Arc 01.
 5. **Collections and queries.** Filtering/search, ordering, limits, offset/cursor pagination,
    tie-breaking, continuation tokens, totals, SQL/indexes, and changing data. Prove behavior
    through a client traversing results.

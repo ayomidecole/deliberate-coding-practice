@@ -43,7 +43,21 @@ are supplied. You own app creation and the route-to-handler mapping.
 ### `src/app.ts`
 
 1. Create and export a Hono app named `app` using the supplied `Hono` import.
+
+   Reference: [Hono App — opening example](https://hono.dev/docs/api/hono).
+   Look at how `new Hono()` creates the app. This exercise needs a **named export**
+   because the test imports `{ app }`; the documentation's `export default app`
+   is a different export style. For a refresher, see
+   [TypeScript Modules — Additional export syntax](https://www.typescriptlang.org/docs/handbook/2/modules.html#additional-export-syntax)
+   and its `export const` example.
+
 2. Register each path in the contract as a GET route using its matching handler.
+
+   Reference: [Hono Routing — Basic](https://hono.dev/docs/api/routing#basic).
+   Read the first `app.get(...)` example: the first argument is the path and the
+   second is a handler function. That example writes the function inline; you
+   already have imported functions, so pass the appropriate function name instead.
+   Leave off `()` after that name so Hono can call it when a request arrives.
 
 Do not recreate business logic, return a response from `app.ts`, add a server,
 or register a catch-all route. Both paths must be available on the **same** app.
@@ -74,6 +88,6 @@ npm test -- 01-hono-foundations/006-compose-fixture-app
 The test checks both route responses and that an unknown path remains `404`.
 Ask me to review when both commands pass; no written reflection is required.
 
-References: [Hono routing (Basic)](https://hono.dev/docs/api/routing#basic)
-for registering method/path/handler, and [Hono testing](https://hono.dev/docs/guides/testing)
-for calling an app without a server.
+Optional test reference: [Hono App — request()](https://hono.dev/docs/api/hono#request).
+Read the first GET example to understand how the supplied test sends a request
+without starting a server.
