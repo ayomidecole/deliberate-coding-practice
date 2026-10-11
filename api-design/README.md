@@ -9,6 +9,7 @@ skills where needed before combining them; Go experience does not establish Hono
 API-001 through [API-010](01-hono-foundations/010-build-training-groups-api/TASK.md)
 are complete. API-010 passed eight tests/typecheck and a live response check:
 model/domain logic was correct; response wrapping needed guidance. Tests were supplied.
+[API-011](01-hono-foundations/011-add-training-group-summary/TASK.md) extends a self-contained copy with a summary endpoint, preserving the list contract.
 Dependencies and checks are isolated from the other tracks. Node 22+ is required.
 
 ## Layout and ownership
