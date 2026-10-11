@@ -47,6 +47,9 @@ Read what the callback must return for an item to stay in the result.
 
 ### 2. `src/services/list-away-fixtures.test.ts`
 
+Completed by the tutor at your request. The case below is now implemented;
+test authorship is not assessed in this exercise.
+
 Replace the `it.todo(...)` with one actual test. Choose a club ID and construct
 four fixtures: two away matches, one home match, and one unrelated match.
 Mix their order, call the service, and assert that its result contains exactly

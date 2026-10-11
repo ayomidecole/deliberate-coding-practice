@@ -5,7 +5,7 @@ export function listAwayFixtures(
   clubId: string,
 ): Fixture[] {
   const awayFixtures = fixtures.filter((fixture) => {
-    fixture.awayClubId === clubId;
+    return fixture.awayClubId === clubId;
   });
 
   return awayFixtures;

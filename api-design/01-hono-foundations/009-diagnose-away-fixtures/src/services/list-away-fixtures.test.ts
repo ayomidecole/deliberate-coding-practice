@@ -21,6 +21,23 @@ describe('listAwayFixtures', () => {
     expect(result).toEqual([]);
   });
 
-  // Replace this todo with a test: arrange fixtures, call the service, assert the array.
-  it.todo('returns away matches in order while excluding home and unrelated matches');
+  it('returns away matches in order while excluding home and unrelated matches', () => {
+    const awayFirst = new Fixture({
+      id: 'fixture-b', homeClubId: 'club-3', awayClubId: 'club-10',
+    });
+    const home = new Fixture({
+      id: 'fixture-c', homeClubId: 'club-10', awayClubId: 'club-4',
+    });
+    const unrelated = new Fixture({
+      id: 'fixture-d', homeClubId: 'club-5', awayClubId: 'club-6',
+    });
+    const awaySecond = new Fixture({
+      id: 'fixture-e', homeClubId: 'club-7', awayClubId: 'club-10',
+    });
+    const input = [awayFirst, home, unrelated, awaySecond];
+
+    const result = listAwayFixtures(input, 'club-10');
+
+    expect(result).toEqual([awayFirst, awaySecond]);
+  });
 });
