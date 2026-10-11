@@ -55,8 +55,8 @@ business rules.
 - Scope-preflight every assignment against current evidence: required operations,
   assistance, first three edits, likely stuck point, and raised difficulty dimension.
   The arc table is not proof that prerequisites have been mastered.
-- Supply unfamiliar test infrastructure. Then vary learner test ownership within familiar
-  boundaries; do not wait until the end of the arc to practice writing tests.
+- Supply tests by default at the learner's request. Learner ownership means judging
+  cases, reviewing assertions, running checks, and diagnosing failures—not routine typing.
 - Colocate tests: domain tests in `domain/`, service tests in `services/`, handler tests
   in `handlers/`, and app tests beside `app.ts`. No separate exercise `tests/` directory.
 - Review code and execution, record help accurately, and retrieve assisted skills later.
@@ -86,5 +86,7 @@ API-001 through [API-008](008-build-home-fixtures-api/TASK.md) are complete.
 API-008 combined service, handler, and app wiring; five tests, typecheck, and live
 HTTP checks passed. Filter callbacks, response objects, and exports needed guidance;
 retrieve these before adding another framework operation.
-[API-009](009-diagnose-away-fixtures/TASK.md) is a bounded service repair with
-one learner-written regression test and supplied API wiring.
+[API-009](009-diagnose-away-fixtures/TASK.md) is complete: learner repaired the
+callback, tutor wrote the requested regression test; five tests/typecheck/live checks passed.
+[API-010](010-build-training-groups-api/TASK.md) retrieves model/domain construction
+and handler response shape in a changed API, with service/wiring/tests supplied.

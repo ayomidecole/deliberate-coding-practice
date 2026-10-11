@@ -6,10 +6,10 @@ skills where needed before combining them; Go experience does not establish Hono
 
 ## Start
 
-API-001 through [API-008](01-hono-foundations/008-build-home-fixtures-api/TASK.md) are complete.
-API-008 passed five tests, typecheck, and live HTTP checks with guidance on filtering,
-response construction, and exports. [API-009](01-hono-foundations/009-diagnose-away-fixtures/TASK.md)
-retrieves callback returns through a single service repair and one learner test case.
+API-001 through API-009 are complete. API-009's learner callback repair passed five
+tests, typecheck, and live HTTP checks; its regression test was tutor-written on request.
+[API-010](01-hono-foundations/010-build-training-groups-api/TASK.md) retrieves model/domain
+construction and response-object handling with supplied service, wiring, and tests.
 Dependencies and checks are isolated from the other tracks. Node 22+ is required.
 
 ## Layout and ownership
@@ -36,8 +36,10 @@ an individual-part exercise does not need all these folders.
 
 The learner writes feature/app implementation; routine server launchers are supplied.
 The tutor explains, supplies focused docs, and
-reviews code. Supply tooling and unfamiliar test harnesses, vary later test ownership,
-and provide worked examples when requested. The eleven-arc design curriculum remains.
+reviews code. Tests are tutor-written by default at the learner's request; the learner
+owns behavior/case judgment, assertion review, execution, and diagnosis. Manual test
+authorship is not a routine requirement. Supply tooling and worked examples when needed.
+The eleven-arc design curriculum remains.
 
 ## Provisional curriculum
 
