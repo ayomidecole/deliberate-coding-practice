@@ -3,7 +3,6 @@ import type { TrainingGroupRecord } from '../models/training-group.js';
 export class TrainingGroup {
   readonly id: string;
   readonly capacity: number
-  // Declare capacity here.
 
   constructor(record: TrainingGroupRecord) {
     const validCapacity = record.capacity > 0

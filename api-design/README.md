@@ -6,10 +6,9 @@ skills where needed before combining them; Go experience does not establish Hono
 
 ## Start
 
-API-001 through API-009 are complete. API-009's learner callback repair passed five
-tests, typecheck, and live HTTP checks; its regression test was tutor-written on request.
-[API-010](01-hono-foundations/010-build-training-groups-api/TASK.md) retrieves model/domain
-construction and response-object handling with supplied service, wiring, and tests.
+API-001 through [API-010](01-hono-foundations/010-build-training-groups-api/TASK.md)
+are complete. API-010 passed eight tests/typecheck and a live response check:
+model/domain logic was correct; response wrapping needed guidance. Tests were supplied.
 Dependencies and checks are isolated from the other tracks. Node 22+ is required.
 
 ## Layout and ownership

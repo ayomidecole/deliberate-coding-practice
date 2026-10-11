@@ -88,5 +88,6 @@ HTTP checks passed. Filter callbacks, response objects, and exports needed guida
 retrieve these before adding another framework operation.
 [API-009](009-diagnose-away-fixtures/TASK.md) is complete: learner repaired the
 callback, tutor wrote the requested regression test; five tests/typecheck/live checks passed.
-[API-010](010-build-training-groups-api/TASK.md) retrieves model/domain construction
-and handler response shape in a changed API, with service/wiring/tests supplied.
+[API-010](010-build-training-groups-api/TASK.md) is complete: eight tests/typecheck
+passed and the live response matched. Model/domain logic was correct; response wrapping
+needed guidance. Put expected JSON beside handler instructions in subsequent tasks.
