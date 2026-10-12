@@ -94,8 +94,13 @@ npx vitest run 01-hono-foundations/012-return-training-group-ids
 npx tsx 01-hono-foundations/012-return-training-group-ids/src/server.ts
 ```
 
-In Hoppscotch at `http://localhost:3012`, check both routes against the JSON above.
-An unknown route returns 404. Stop the server with Ctrl+C afterward.
+In Hoppscotch, use GET:
+
+- `http://localhost:3012/training-groups`: 200 and the ID response above.
+- `http://localhost:3012/training-group-summary`: 200 and the summary above.
+- `http://localhost:3012/missing`: 404.
+
+Stop the server with Ctrl+C afterward.
 
 The starter typechecks. Eleven retained tests pass; four tests fail until the
 ID service and list handler are complete.

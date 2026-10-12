@@ -12,8 +12,11 @@ model/domain logic was correct; response wrapping needed guidance. Tests were su
 [API-011](01-hono-foundations/011-add-training-group-summary/TASK.md) is complete:
 twelve tests/typecheck/live HTTP passed. Handler/routes were correct; service needed
 length-property and branch guidance. Related handlers share one resource file.
-[API-012](01-hono-foundations/012-return-training-group-ids/TASK.md) retrieves array
-transformation and response construction; selection, summary, wiring, and tests supplied.
+[API-012](01-hono-foundations/012-return-training-group-ids/TASK.md) is complete:
+fifteen tests/typecheck and both live responses passed. Map needed targeted guidance;
+handler response construction was correct without correction.
+[API-013](01-hono-foundations/013-read-club-query/TASK.md) introduces a named string
+query parameter in one handler; selection, fallback, wiring, and tests supplied.
 Dependencies and checks are isolated from the other tracks. Node 22+ is required.
 
 ## Layout and ownership

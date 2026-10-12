@@ -93,5 +93,7 @@ passed and the live response matched. Model/domain logic was correct; response w
 needed guidance. Put expected JSON beside handler instructions in subsequent tasks.
 [API-011](011-add-training-group-summary/TASK.md) is complete: twelve tests/typecheck/live
 HTTP passed. Summary handler/routes were correct; service length/branch guidance provided.
-[API-012](012-return-training-group-ids/TASK.md) changes the practice list contract to ID
-strings, retrieving map/return-value reasoning with a supplied syntax refresher.
+[API-012](012-return-training-group-ids/TASK.md) is complete: fifteen tests/typecheck and
+both live responses passed. Guided map correction; handler correct without correction.
+[API-013](013-read-club-query/TASK.md) makes a request's club ID control fixture selection.
+One new query lookup; fallback and existing selection logic supplied.
