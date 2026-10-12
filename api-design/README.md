@@ -9,7 +9,11 @@ skills where needed before combining them; Go experience does not establish Hono
 API-001 through [API-010](01-hono-foundations/010-build-training-groups-api/TASK.md)
 are complete. API-010 passed eight tests/typecheck and a live response check:
 model/domain logic was correct; response wrapping needed guidance. Tests were supplied.
-[API-011](01-hono-foundations/011-add-training-group-summary/TASK.md) extends a self-contained copy with a summary endpoint, preserving the list contract.
+[API-011](01-hono-foundations/011-add-training-group-summary/TASK.md) is complete:
+twelve tests/typecheck/live HTTP passed. Handler/routes were correct; service needed
+length-property and branch guidance. Related handlers share one resource file.
+[API-012](01-hono-foundations/012-return-training-group-ids/TASK.md) retrieves array
+transformation and response construction; selection, summary, wiring, and tests supplied.
 Dependencies and checks are isolated from the other tracks. Node 22+ is required.
 
 ## Layout and ownership
@@ -27,8 +31,9 @@ them together in complete features with fading guidance.
 
 Use `src/models/` for record types, `src/domain/` for business objects/invariants,
 `src/services/` for application operations, `src/handlers/` for HTTP translation with
-nearby private DTOs, `src/app.ts` for routes,
-and `src/server.ts` for startup. A temporary `seed.ts` contains sample records, not a layer.
+nearby private DTOs, `src/app.ts` for routes, and `src/server.ts` for startup.
+Group related handlers in a resource file, such as `handlers/training-groups.ts`.
+A temporary `seed.ts` contains sample records, not a layer.
 Colocate tests: `models/club.typecheck.ts`, `domain/club.test.ts`,
 `services/club-service.test.ts`, `handlers/club-profile.test.ts`, and `app.test.ts` beside
 their corresponding source. Add layers when the task practices their responsibility;

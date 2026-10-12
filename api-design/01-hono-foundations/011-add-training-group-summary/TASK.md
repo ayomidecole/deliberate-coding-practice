@@ -35,7 +35,10 @@ Reference: [Array length — Description](https://developer.mozilla.org/en-US/do
 
 Run the service checkpoint below before moving on.
 
-### 2. `src/handlers/get-training-group-summary.ts`
+### 2. `src/handlers/training-groups.ts`
+
+Complete `getTrainingGroupSummary` beside the existing `getTrainingGroups` handler.
+Both handlers belong to the training-groups resource; keep the list handler working.
 
 Call your count service using the imported seed groups and party size. Return
 HTTP 200 with this exact JSON shape for the supplied seed:

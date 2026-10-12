@@ -91,4 +91,7 @@ callback, tutor wrote the requested regression test; five tests/typecheck/live c
 [API-010](010-build-training-groups-api/TASK.md) is complete: eight tests/typecheck
 passed and the live response matched. Model/domain logic was correct; response wrapping
 needed guidance. Put expected JSON beside handler instructions in subsequent tasks.
-[API-011](011-add-training-group-summary/TASK.md) adds a count service, summary handler, and second route. Tests and launcher are supplied.
+[API-011](011-add-training-group-summary/TASK.md) is complete: twelve tests/typecheck/live
+HTTP passed. Summary handler/routes were correct; service length/branch guidance provided.
+[API-012](012-return-training-group-ids/TASK.md) changes the practice list contract to ID
+strings, retrieving map/return-value reasoning with a supplied syntax refresher.

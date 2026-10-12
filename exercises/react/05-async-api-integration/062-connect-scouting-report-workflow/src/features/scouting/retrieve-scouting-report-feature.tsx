@@ -18,7 +18,14 @@ export function RetrieveScoutingReportFeature() {
 
     const loadReport = async (reportId: string) => {
         try {
-            void reportId;
+            setRequestState({ status: 'loading' });
+            const report = await getScoutingReport(reportId);
+
+            if (!report) {
+                setRequestState({ status: 'not-found' });
+                return;
+            }
+            setRequestState({ status: 'success', record: report });
         } catch (error: unknown) {
             setRequestState({
                 status: 'error',
