@@ -13,5 +13,5 @@ export async function getScoutingReport(reportId: string): Promise<ScoutingRepor
 
   const body: unknown = await response.json()
   
-  return new ScoutingReport(response)
+  return new ScoutingReport(body)
 }

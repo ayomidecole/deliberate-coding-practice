@@ -95,5 +95,8 @@ needed guidance. Put expected JSON beside handler instructions in subsequent tas
 HTTP passed. Summary handler/routes were correct; service length/branch guidance provided.
 [API-012](012-return-training-group-ids/TASK.md) is complete: fifteen tests/typecheck and
 both live responses passed. Guided map correction; handler correct without correction.
-[API-013](013-read-club-query/TASK.md) makes a request's club ID control fixture selection.
-One new query lookup; fallback and existing selection logic supplied.
+[API-013](013-read-club-query/TASK.md) is complete: request-driven club selection,
+default/empty results, nine tests/typecheck/live HTTP passed. Fallback was supplied;
+query lookup/service inputs/response correct without correction in this chat.
+[API-014](014-diagnose-club-selection/TASK.md) is complete: service argument repaired
+without follow-up hints; nine tests/typecheck/live HTTP passed. Tracing guide supplied.

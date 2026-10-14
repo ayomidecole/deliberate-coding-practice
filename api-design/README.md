@@ -15,8 +15,10 @@ length-property and branch guidance. Related handlers share one resource file.
 [API-012](01-hono-foundations/012-return-training-group-ids/TASK.md) is complete:
 fifteen tests/typecheck and both live responses passed. Map needed targeted guidance;
 handler response construction was correct without correction.
-[API-013](01-hono-foundations/013-read-club-query/TASK.md) introduces a named string
-query parameter in one handler; selection, fallback, wiring, and tests supplied.
+[API-013](01-hono-foundations/013-read-club-query/TASK.md) is complete: nine tests,
+typecheck, and live HTTP passed. Query/service/response correct with supplied fallback.
+[API-014](01-hono-foundations/014-diagnose-club-selection/TASK.md) is complete:
+learner repaired the service argument without follow-up hints; nine tests/typecheck/live HTTP passed.
 Dependencies and checks are isolated from the other tracks. Node 22+ is required.
 
 ## Layout and ownership
