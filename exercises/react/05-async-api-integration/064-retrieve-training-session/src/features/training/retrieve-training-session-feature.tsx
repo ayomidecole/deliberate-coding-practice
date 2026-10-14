@@ -18,14 +18,7 @@ export function RetrieveTrainingSessionFeature() {
 
     const loadSession = async (sessionId: string) => {
         try {
-            setRequestState({ status: 'loading' });
-            const report = await getTrainingSession(sessionId);
-
-            if (!report) {
-                setRequestState({ status: 'not-found' });
-                return;
-            }
-            setRequestState({ status: 'success', record: report });
+            void sessionId;
         } catch (error: unknown) {
             setRequestState({
                 status: 'error',
