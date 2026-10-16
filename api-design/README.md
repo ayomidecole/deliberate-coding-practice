@@ -19,6 +19,12 @@ handler response construction was correct without correction.
 typecheck, and live HTTP passed. Query/service/response correct with supplied fallback.
 [API-014](01-hono-foundations/014-diagnose-club-selection/TASK.md) is complete:
 learner repaired the service argument without follow-up hints; nine tests/typecheck/live HTTP passed.
+[API-015](01-hono-foundations/015-require-club-query/TASK.md) is complete: ten tests,
+typecheck, and live 200/400 screenshots passed. Guard/return correct; status argument prompted.
+[API-016](01-hono-foundations/016-map-coach-lookup/TASK.md) is complete: ten tests,
+typecheck/live HTTP passed; 404/object-field guidance provided.
+[API-017](01-hono-foundations/017-read-coach-json/TASK.md) introduces awaited JSON
+body reading in a supplied async POST handler; lookup response practice retained.
 Dependencies and checks are isolated from the other tracks. Node 22+ is required.
 
 ## Layout and ownership

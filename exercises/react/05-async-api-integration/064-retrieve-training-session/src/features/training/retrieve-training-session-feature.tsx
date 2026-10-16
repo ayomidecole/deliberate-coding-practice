@@ -11,22 +11,35 @@ type RequestState =
     | { readonly status: 'not-found' }
     | { readonly status: 'error'; readonly message: string };
 
+const requestStates = {
+    idle: { status: 'idle' } satisfies RequestState,
+    loading: { status: 'loading' } satisfies RequestState,
+    notFound: { status: 'not-found' } satisfies RequestState,
+    success: (record: TrainingSession): RequestState => ({ status: 'success', record }),
+    error: (message: string): RequestState => ({ status: 'error', message }),
+};
+
 export function RetrieveTrainingSessionFeature() {
-    const [requestState, setRequestState] = useState<RequestState>({
-        status: 'idle',
-    });
+    const [requestState, setRequestState] = useState<RequestState>(requestStates.idle);
 
     const loadSession = async (sessionId: string) => {
         try {
-            void sessionId;
+            setRequestState(requestStates.loading)
+
+            const trainingSession = await getTrainingSession(sessionId)
+
+            if (!trainingSession) {
+                setRequestState(requestStates.notFound)
+                return
+            }
+
+            setRequestState(requestStates.success(trainingSession))
         } catch (error: unknown) {
-            setRequestState({
-                status: 'error',
-                message:
-                    error instanceof Error
+            setRequestState(requestStates.error(
+                error instanceof Error
                         ? error.message
                         : 'The training session request failed',
-            });
+            ));
         }
     };
 

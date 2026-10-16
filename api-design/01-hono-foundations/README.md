@@ -100,3 +100,9 @@ default/empty results, nine tests/typecheck/live HTTP passed. Fallback was suppl
 query lookup/service inputs/response correct without correction in this chat.
 [API-014](014-diagnose-club-selection/TASK.md) is complete: service argument repaired
 without follow-up hints; nine tests/typecheck/live HTTP passed. Tracing guide supplied.
+[API-015](015-require-club-query/TASK.md) is complete: ten tests/typecheck and live
+200/400 screenshots passed. Guard/return correct; c.json status argument prompted.
+[API-016](016-map-coach-lookup/TASK.md) is complete: ten tests/typecheck/live HTTP
+passed after 404/object-field guidance.
+[API-017](017-read-coach-json/TASK.md) introduces JSON-body POST reading with a
+supplied async signature, parse-error handling, runtime validation, and tests.

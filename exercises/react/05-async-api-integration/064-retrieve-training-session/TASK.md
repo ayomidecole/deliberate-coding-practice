@@ -67,25 +67,34 @@ Checkpoint: **7 client tests pass**. The browser waits for the feature implement
 ## Checkpoint 2 — Feature handler
 
 In `src/features/training/retrieve-training-session-feature.tsx`, replace only
-`void sessionId;` inside `loadSession`'s `try` block. Preserve the supplied catch and JSX.
+the starter body inside `loadSession`'s `try` block (or complete your current attempt).
+Preserve the supplied catch, named request states, and JSX.
 
 | Moment / client outcome | State passed to `setRequestState` |
 |---|---|
-| Request starts | `{ status: 'loading' }` |
-| Client resolves to `null` | `{ status: 'not-found' }` |
-| Client resolves to a model | `{ status: 'success', record: returnedSession }` |
+| Request starts | `requestStates.loading` |
+| Client resolves to `null` | `requestStates.notFound` |
+| Client resolves to a model | `requestStates.success(returnedSession)` |
 | Client throws | Supplied catch handles the error |
 
 `returnedSession` means your local variable holding the client's resolved value.
+The supplied `requestStates` variable contains the states so you do not need to
+type object literals. Loading and absence have no payload; success is a function
+because it must include the session returned by this request. For example:
+
+```ts
+setRequestState(requestStates.loading);
+```
+
 Call the imported `getTrainingSession` with the handler's `sessionId`. Do not fetch,
 read JSON, or construct the model here. Keep missing and success paths exclusive.
 Starting another request replaces previous record/error state with loading.
 
 First edit in this file: set loading before awaiting the request. No new state
-variables, effects, imports, helper abstractions, or test authorship required.
+variables, effects, imports, or test authorship required. State construction is supplied.
 
 Doc: [React: connect event handlers to state](https://react.dev/learn/reacting-to-input-with-state#step-5-connect-the-event-handlers-to-set-the-state).
-Look at the updates surrounding `await` in `handleSubmit`; our state object is supplied.
+Look at the updates surrounding `await` in `handleSubmit`; use our supplied named states.
 
 ```bash
 npx vitest run exercises/react/05-async-api-integration/064-retrieve-training-session/src/features/training/retrieve-training-session-feature.test.tsx
